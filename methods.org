@@ -1,0 +1,21 @@
+* Piotr Wozniak's 20 rules of formulating knowledge for spaced repetition
+** 1. Avoid learning anything without understanding it.
+** 2.  Understand before committing to memory.  
+** 3. Use a simpler model as a starting point for additional knowledge.
+** 4. Make deliberate choices about how to simply represent knowledge.
+** 5. Create blanks, then fill them in.
+** 6. Use pictures, charts, and graphs to make connections.
+** 7. Build your own mnemonic representations of concepts.
+** 8. Create blanks in pictures, then fill them in.
+** 9. Unordered collections are the hardest things to memorize.
+** 10. Ordered collections are easier, but it's still better to avoid them.
+** 11. Avoid creating memorized facts that conflict with other topics.
+** 12. Simplify the wording of facts, to emphasize the real goal.
+** 13. Make memorized information overlap with related memories.
+** 14. Give yourself context clues from your own life.
+** 15. Make your examples vivid.
+** 16. Create topic-specific identifiers for domain information.
+** 17. Redundancy is not an enemy of simplicity.
+** 18. Source the information in a fact to memorize.
+** 19. Date the information in a fact to memorize.
+** 20. Focus on the most important knowledge.
