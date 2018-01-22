@@ -1,0 +1,39 @@
+
+* Emacs Lisp
+  :PROPERTIES:
+  :ID:       907fcaa0-28e0-4255-8f84-12b76570c811
+  :BRAIN_PARENTS: 6464d5a9-338d-4cc3-a58d-7337f2d459a6
+  :END:
+
+* emacs deck                                                           :deck: 
+** remove agenda filter                                                :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1516568999718
+   :END:
+
+*** Front
+remove the filter from emacs/org-agenda
+*** Back
+|
+** dired sort switch                                                   :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1516568999923
+   :END:
+
+*** Front
+switch buffer sorting modes in emacs/dired
+*** Back
+s
+** variable name                                                       :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1516569000084
+   :END:
+
+*** Front
+find the name of a variable in emacs
+
+*** Back
+M-x describe-variable

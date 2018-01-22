@@ -1,0 +1,30 @@
+* Scala
+   :PROPERTIES:
+   :ID:       295a3ef6-10e2-4faf-95ee-88bcbc248b92
+   :BRAIN_PARENTS: 67069e3b-0693-4cd6-8429-949de721e47e
+   :END:
+
+#+BEGIN_description 
+Functional programming and category theory on the JVM.
+#+END_description 
+
+A JVM language with strong foundations in category theory. Used often for distributed data-intensive applications with frameworks like Akka, Storm, and Spark. 
+* Scala Deck :deck: 
+** get first n elements of sequence in scala
+#+begin_src scala  
+seq.take(n)
+#+end_src
+** apply a udf to a list of columns in spark
+
+#+begin_src scala 
+var tempdf = df
+cols.map{c => tempdf.withColumn(c, udf(col(c)))}
+#+end_src 
+** combine two sequences in Scala
+#+begin_src scala 
+seq1 ++ seq2
+#+end_src
+** select a sequence of column names in Spark
+#+begin_src scala 
+df.select(cols.head, cols.tail: _*)
+#+end_src
