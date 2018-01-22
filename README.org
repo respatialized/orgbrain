@@ -1,0 +1,2 @@
+* ORGBRAIN
+This repo contains my notes on most everything I'm trying to learn right now.
