@@ -30,16 +30,44 @@ seq.take(n)
 #+begin_src scala 
 seq1 ++ seq2
 #+end_src
+* Apache Spark
 
-* Spark Deck
-** apply a udf to a list of columns in spark
+#+BEGIN_description 
+Distributed, fault-tolerant data processing for data pipelines and large-scale data science.
+#+END_description 
 
+** Spark Deck :deck: 
+*** udf on list of columns                                             :note:
+    :PROPERTIES:
+    :ANKI_NOTE_TYPE: Basic
+    :END:
+**** Front
+     apply a udf to a list of columns in spark
+**** Back
 #+begin_src scala 
 var tempdf = df
 cols.map{c => tempdf.withColumn(c, udf(col(c)))}
 #+end_src 
-
-** select a sequence of column names in Spark
+*** select column sequence                                             :note:
+    :PROPERTIES:
+    :ANKI_NOTE_TYPE: Basic
+    :END:
+**** Front
+select a sequence of column names in Spark
+**** Back
 #+begin_src scala 
 df.select(cols.head, cols.tail: _*)
 #+end_src
+
+*** basic model                                                        :note:
+    :PROPERTIES:
+    :ANKI_NOTE_TYPE: Basic
+    :END:
+
+**** Front
+High-level summary of any Spark program
+
+**** Back
+1. represent data as collection of RDDs
+2. build up a series of lazy transformations on those RDDs
+3. perform actions to get the results of those transformations

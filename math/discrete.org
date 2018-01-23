@@ -1,0 +1,21 @@
+* Data Science
+  :PROPERTIES:
+  :ID:       f97ea0b7-60f4-4fd3-9ebb-c5186e8000e1
+  :END:
+* Linear Algebra
+  :PROPERTIES:
+  :ID:       bcc4c5ef-673b-42a7-a188-a49a612c6dd5
+  :END:
+** Principal Component Analysis + KMeans
+   :PROPERTIES:
+   :ID:       185ab8c8-6f71-4035-a523-8e719ae87435
+   :END:
+<2018-01-23 Tue>
+An "Aha!" moment - after  struggling to understand, I realized that K-Means on projected data *must* perform an additional linear combination of the principal components, because the centroid of each grouping of points *just is* a linear combination. 
+
+A further extension of this idea from Wikipedia: 
+#+BEGIN_QUOTE 
+It was proven that the relaxed solution of k-means clustering, specified by the cluster indicators, is given by principal component analysis (PCA), and the PCA subspace spanned by the principal directions is identical to the cluster centroid subspace. The intuition is that k-means describe spherically shaped (ball-like) clusters. If the data has 2 clusters, the line connecting the two centroids is the best 1-dimensional projection direction, which is also the first PCA direction. Cutting the line at the center of mass separates the clusters (this is the continuous relaxation of the discrete cluster indicator). If the data have three clusters, the 2-dimensional plane spanned by three cluster centroids is the best 2-D projection. This plane is also defined by the first two PCA dimensions. Well-separated clusters are effectively modeled by ball-shaped clusters and thus discovered by K-means. Non-ball-shaped clusters are hard to separate when they are close. For example, two half-moon shaped clusters intertwined in space do not separate well when projected onto PCA subspace. But k-means should not be expected to do well on this data. However, PCA's being a useful relaxation of k-means clustering was not a new result, and it is straightforward to produce counterexamples to the statement that the cluster centroid subspace is spanned by the principal directions.
+#+END_QUOTE
+
+Component interpretations are important here because they allow you to make sense of the positive and negative numbers in the higher-dimensional cluster mean space. Each vector corresponds to a cluster mean. Each successive number within each vector, then, is a point along the axis created by the principal component. So, for example, the first principal component in the data was "Low Income" - so anything with a negative value for the first value in the cluster mean vector would be, intuitively "Higher Income." 
