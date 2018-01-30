@@ -23,6 +23,7 @@ Component interpretations are important here because they allow you to make sens
 ** k-means step                                                        :note:
    :PROPERTIES: 
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330514396
    :END: 
 *** Front
 in each refinement step of k-means, the cluster is updated by taking a ______ from the assigned points

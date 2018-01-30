@@ -19,6 +19,7 @@ Distributed, fault-tolerant data processing for data pipelines and large-scale d
 ** first n                                                             :note:
    :PROPERTIES:
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330349906
    :END:
 *** Front
     get first n elements of sequence in scala
@@ -29,6 +30,7 @@ seq.take(n)
 ** concat sequences                                                    :note:
    :PROPERTIES:
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330350091
    :END:
 *** Front
     combine two sequences in Scala
@@ -40,6 +42,7 @@ seq1 ++ seq2
 ** string from seq scala                                               :note:
    :PROPERTIES: 
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330350305
    :END: 
 *** Front
 join a sequence with a delimiter in scala
@@ -49,6 +52,7 @@ join a sequence with a delimiter in scala
 ** scala elementwise comparison                                        :note:
    :PROPERTIES: 
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330350490
    :END: 
 *** Front
 get the element-wise comparison of two sequences in scala
@@ -57,6 +61,7 @@ get the element-wise comparison of two sequences in scala
 ** scala nested loop                                                   :note:
    :PROPERTIES: 
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330350709
    :END: 
 *** Front
 construct a nested loop in scala
@@ -65,6 +70,7 @@ construct a nested loop in scala
 ** create a list by repeating in scala                                 :note:
    :PROPERTIES: 
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330350893
    :END: 
 *** Front
 Repeat item i n times to form a list in scala
@@ -75,6 +81,7 @@ List.fill(n)(i)
 ** get the current timestamp in scala                                  :note:
    :PROPERTIES: 
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330351133
    :END: 
 *** Front
 Get the current timestamp in Scala (and Java)
@@ -84,11 +91,11 @@ LocalDateTime.of(Calendar.getInstance.getTime.toInstant, ZoneId.of("America/New 
 #+end_src  
 It has to be a new calendar instance!
 
-
 * Spark Deck                                                           :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330296324
    :END:
 *** Front
     apply a udf to a list of columns in spark
@@ -100,6 +107,7 @@ cols.map{c => tempdf.withColumn(c, udf(col(c)))}
 ** select column sequence                                              :note:
    :PROPERTIES:
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330296492
    :END:
 *** Front
 select a sequence of column names in Spark
@@ -111,6 +119,7 @@ df.select(cols.head, cols.tail: _*)
 ** basic model                                                         :note:
    :PROPERTIES:
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330100262
    :END:
 
 *** Front
@@ -123,6 +132,7 @@ High-level summary of any Spark program
 ** spark row to sequence                                               :note:
    :PROPERTIES: 
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330296951
    :END: 
 *** Front
 Convert a Row to a sequence in Spark

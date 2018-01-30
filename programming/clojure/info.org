@@ -11,6 +11,7 @@ my function doesn't work because i don't have a way of comparing the "left hand"
 ** iterable clojure                                                    :note:
    :PROPERTIES: 
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330487212
    :END: 
 *** Front
 Check if a value is sequential in clojure

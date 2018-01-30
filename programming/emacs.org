@@ -5,7 +5,7 @@
   :BRAIN_PARENTS: 6464d5a9-338d-4cc3-a58d-7337f2d459a6
   :END:
 
-* emacs deck                                                           :deck: 
+* Emacs Deck                                                           :deck: 
 ** remove agenda filter                                                :note:
    :PROPERTIES:
    :ANKI_NOTE_TYPE: Basic
@@ -40,6 +40,7 @@ M-x describe-variable
 ** magit history                                                       :note:
    :PROPERTIES: 
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330379270
    :END: 
 *** Front 
  Show a repo's history in magit
@@ -49,6 +50,7 @@ M-x describe-variable
 ** org agenda bulk command in emacs                                    :note:
    :PROPERTIES: 
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330379456
    :END: 
 *** Front
 In emacs' org-agenda, execute a bulk command on marked files
@@ -57,6 +59,7 @@ In emacs' org-agenda, execute a bulk command on marked files
 ** clock into a task from org-agenda                                   :note:
    :PROPERTIES: 
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330379669
    :END: 
 *** Front
 Clock into a task from org-agenda
@@ -66,6 +69,7 @@ Clock into a task from org-agenda
 ** cider get buffer namespace                                          :note:
    :PROPERTIES: 
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330379858
    :END: 
 *** Front
 In CIDER/emacs, jump into the buffer's clojure namespace
