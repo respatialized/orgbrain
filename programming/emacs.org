@@ -37,3 +37,37 @@ find the name of a variable in emacs
 
 *** Back
 M-x describe-variable
+** magit history                                                       :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front 
+ Show a repo's history in magit
+*** Back
+    "l l"
+(that's "L", but lowercase)
+** org agenda bulk command in emacs                                    :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+In emacs' org-agenda, execute a bulk command on marked files
+*** Back
+"B"
+** clock into a task from org-agenda                                   :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+Clock into a task from org-agenda
+*** Back
+"I"
+(that's a capital "i")
+** cider get buffer namespace                                          :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+In CIDER/emacs, jump into the buffer's clojure namespace
+*** Back
+M-x cider-repl-set-ns

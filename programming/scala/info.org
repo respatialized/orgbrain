@@ -9,6 +9,12 @@ Functional programming and category theory on the JVM.
 #+END_description 
 
 A JVM language with strong foundations in category theory. Used often for distributed data-intensive applications with frameworks like Akka, Storm, and Spark. 
+* Apache Spark
+
+#+BEGIN_description 
+Distributed, fault-tolerant data processing for data pipelines and large-scale data science.
+#+END_description 
+
 * Scala Deck :deck: 
 ** first n                                                             :note:
    :PROPERTIES:
@@ -30,44 +36,97 @@ seq.take(n)
 #+begin_src scala 
 seq1 ++ seq2
 #+end_src
-* Apache Spark
 
-#+BEGIN_description 
-Distributed, fault-tolerant data processing for data pipelines and large-scale data science.
-#+END_description 
+** string from seq scala                                               :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+join a sequence with a delimiter in scala
 
-** Spark Deck :deck: 
-*** udf on list of columns                                             :note:
-    :PROPERTIES:
-    :ANKI_NOTE_TYPE: Basic
-    :END:
-**** Front
-     apply a udf to a list of columns in spark
-**** Back
+*** Back
+~seq.mkString(delim)~
+** scala elementwise comparison                                        :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+get the element-wise comparison of two sequences in scala
+*** Back
+~seq1.deep == seq2.deep~
+** scala nested loop                                                   :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+construct a nested loop in scala
+*** Back
+~for (x <- xs; y <- ys) {}~
+** create a list by repeating in scala                                 :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+Repeat item i n times to form a list in scala
+*** Back
+#+begin_src scala
+List.fill(n)(i)
+#+end_src 
+** get the current timestamp in scala                                  :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+Get the current timestamp in Scala (and Java)
+*** Back
+#+begin_src scala
+LocalDateTime.of(Calendar.getInstance.getTime.toInstant, ZoneId.of("America/New York"))
+#+end_src  
+It has to be a new calendar instance!
+
+
+* Spark Deck                                                           :deck: 
+** udf on list of columns                                              :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :END:
+*** Front
+    apply a udf to a list of columns in spark
+*** Back
 #+begin_src scala 
 var tempdf = df
 cols.map{c => tempdf.withColumn(c, udf(col(c)))}
 #+end_src 
-*** select column sequence                                             :note:
-    :PROPERTIES:
-    :ANKI_NOTE_TYPE: Basic
-    :END:
-**** Front
+** select column sequence                                              :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :END:
+*** Front
 select a sequence of column names in Spark
-**** Back
+*** Back
 #+begin_src scala 
 df.select(cols.head, cols.tail: _*)
 #+end_src
 
-*** basic model                                                        :note:
-    :PROPERTIES:
-    :ANKI_NOTE_TYPE: Basic
-    :END:
+** basic model                                                         :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :END:
 
-**** Front
+*** Front
 High-level summary of any Spark program
 
-**** Back
+*** Back
 1. represent data as collection of RDDs
 2. build up a series of lazy transformations on those RDDs
 3. perform actions to get the results of those transformations
+** spark row to sequence                                               :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+Convert a Row to a sequence in Spark
+*** Back
+#+begin_src scala
+Row.toSeq 
+#+end_src
