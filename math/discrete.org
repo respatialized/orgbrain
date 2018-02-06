@@ -1,3 +1,12 @@
+* Statistics
+
+** Chi-Squared Test
+   :PROPERTIES:
+   :ID:       12237503-1bff-4c5c-a8b7-497c11465e6d
+   :CREATED:  <2018-02-06>
+   :SOURCE:   [[https://spark.apache.org/docs/2.2.0/mllib-statistics.html#hypothesis-testing][Spark Statistics Documentation]]
+   :END:
+A chi-squared test tests a hypothesis by comparing an observed distribution to an expected distribution. It returns a p-value indicating the probability of the observed distribution differing from the expected distribution by chance. Typically, when using a chi-squared, one assumes the null hypothesis: that the observed and expected distributions are identical. 
 * Data Science
   :PROPERTIES:
   :ID:       f97ea0b7-60f4-4fd3-9ebb-c5186e8000e1
@@ -29,4 +38,12 @@ Component interpretations are important here because they allow you to make sens
 in each refinement step of k-means, the cluster is updated by taking a ______ from the assigned points
 *** Back
 centroid (which is a linear combination of the points' features) 
-
+** chi-squared probability                                             :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517940754388
+   :END:
+*** Front
+In a chi-squared test, what does the p-value measure the probability of?
+*** Back
+The difference between the observed and expected distribution happening by chance
