@@ -140,3 +140,63 @@ Convert a Row to a sequence in Spark
 #+begin_src scala
 Row.toSeq 
 #+end_src
+** spark join by row number :note:
+:PROPERTIES:
+:ANKI_NOTE_TYPE: Basic
+:END:
+
+*** Front
+
+Get the row number of a dataframe in spark
+
+*** Back
+
+#+begin_src scala 
+df.rdd.zipWithIndex
+#+end_src 
+
+** count null values in a spark column :note:
+:PROPERTIES:
+:ANKI_NOTE_TYPE: Basic
+:END:
+
+*** Front
+
+Find the count of null values in column "x" of a DataFrame df
+
+*** Back
+
+#+begin_src scala
+df.filter(df("x").isNull).count()
+#+end_src
+
+** filter out the NaN values in a Spark dataframe :note:
+:PROPERTIES:
+:ANKI_NOTE_TYPE: Basic
+:END:
+
+*** Front
+
+Filter the NaN values out of column y in a Spark DataFrame
+
+*** Back
+
+#+begin_src scala 
+val filteredDF = df.filter(!df("y").isNaN)
+#+end_src 
+
+** spark drop all nulls :note:
+:PROPERTIES:
+:ANKI_NOTE_TYPE: Basic
+:END:
+
+*** Front
+
+Get rid of any rows with null or NaN values from a df in Spark
+
+*** Back
+
+#+begin_src scala
+df.na.drop()
+#+end_src
+
