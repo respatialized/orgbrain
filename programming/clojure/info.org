@@ -19,3 +19,16 @@ Check if a value is sequential in clojure
 #+begin_src clojure
 (sequential? s)
 #+end_src 
+** get the type of a value in clojure :note:
+:PROPERTIES:
+:ANKI_NOTE_TYPE: Basic
+:END:
+
+*** Front
+
+Get the type of a value v in clojure
+
+*** Back
+#+begin_src clojure
+(class v)
+#+end_src
