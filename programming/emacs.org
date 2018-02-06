@@ -75,3 +75,16 @@ Clock into a task from org-agenda
 In CIDER/emacs, jump into the buffer's clojure namespace
 *** Back
 M-x cider-repl-set-ns
+** org agenda priority :note:
+:PROPERTIES:
+:ANKI_NOTE_TYPE: Basic
+:END:
+
+*** Front
+
+Set the priority of an item in org agenda
+
+*** Back
+
+"," or "-"
+
