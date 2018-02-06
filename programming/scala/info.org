@@ -143,6 +143,7 @@ Row.toSeq
 ** spark join by row number :note:
 :PROPERTIES:
 :ANKI_NOTE_TYPE: Basic
+:ANKI_NOTE_ID: 1517936166278
 :END:
 
 *** Front
@@ -158,6 +159,7 @@ df.rdd.zipWithIndex
 ** count null values in a spark column :note:
 :PROPERTIES:
 :ANKI_NOTE_TYPE: Basic
+:ANKI_NOTE_ID: 1517936166520
 :END:
 
 *** Front
@@ -173,6 +175,7 @@ df.filter(df("x").isNull).count()
 ** filter out the NaN values in a Spark dataframe :note:
 :PROPERTIES:
 :ANKI_NOTE_TYPE: Basic
+:ANKI_NOTE_ID: 1517936166738
 :END:
 
 *** Front
@@ -188,6 +191,7 @@ val filteredDF = df.filter(!df("y").isNaN)
 ** spark drop all nulls :note:
 :PROPERTIES:
 :ANKI_NOTE_TYPE: Basic
+:ANKI_NOTE_ID: 1517936166950
 :END:
 
 *** Front

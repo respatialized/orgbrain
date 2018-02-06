@@ -78,6 +78,7 @@ M-x cider-repl-set-ns
 ** org agenda priority :note:
 :PROPERTIES:
 :ANKI_NOTE_TYPE: Basic
+:ANKI_NOTE_ID: 1517936107413
 :END:
 
 *** Front

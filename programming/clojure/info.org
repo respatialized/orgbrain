@@ -22,6 +22,7 @@ Check if a value is sequential in clojure
 ** get the type of a value in clojure :note:
 :PROPERTIES:
 :ANKI_NOTE_TYPE: Basic
+:ANKI_NOTE_ID: 1517936213844
 :END:
 
 *** Front
