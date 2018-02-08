@@ -107,7 +107,7 @@ The plaintext format for links in org-mode
 *** Front
 Turn off org mode syntax for "this text"
 *** Back
-="this text"=
+= "this text" = (without spaces)
 ** emacs tramp file                                                    :note:
    :PROPERTIES: 
    :ANKI_NOTE_TYPE: Basic
@@ -117,4 +117,4 @@ Turn off org mode syntax for "this text"
 Use tramp for remote editing of a file in emacs
 *** Back
 C-o (find file)
-/ssh:user@server/path/to/file
+/ssh:user@server:path/to/file
