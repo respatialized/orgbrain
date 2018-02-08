@@ -89,3 +89,20 @@ Set the priority of an item in org agenda
 
 "," or "-"
 
+** org link format                                                     :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+The plaintext format for links in org-mode
+*** Back
+=[ [link url][description] ]=
+(without spaces)
+** override org syntax                                                 :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+Turn off org mode syntax for "this text"
+*** Back
+="this text"=
