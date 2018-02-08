@@ -36,6 +36,7 @@ Get the type of a value v in clojure
 ** set up a dynamic sketch in clj/quil                                 :note:
    :PROPERTIES: 
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1518118489452
    :END: 
 *** Front
 In quil, set up a dynamic sketch in clojure from the REPL

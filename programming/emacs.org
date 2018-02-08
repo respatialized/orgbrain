@@ -92,6 +92,7 @@ Set the priority of an item in org agenda
 ** org link format                                                     :note:
    :PROPERTIES: 
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1518118450414
    :END: 
 *** Front
 The plaintext format for links in org-mode
@@ -101,6 +102,7 @@ The plaintext format for links in org-mode
 ** override org syntax                                                 :note:
    :PROPERTIES: 
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1518118450741
    :END: 
 *** Front
 Turn off org mode syntax for "this text"
@@ -109,6 +111,7 @@ Turn off org mode syntax for "this text"
 ** emacs tramp file                                                    :note:
    :PROPERTIES: 
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1518118450982
    :END: 
 *** Front
 Use tramp for remote editing of a file in emacs
