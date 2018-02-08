@@ -204,3 +204,14 @@ Get rid of any rows with null or NaN values from a df in Spark
 df.na.drop()
 #+end_src
 
+** spark chi-squared two vectors                                       :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :CREATED: <2018-02-06 Tue>
+   :END: 
+*** Front
+Compare the distributions of two vectors using a chi-squared test in Spark
+*** Back
+#+begin_src scala 
+Statistics.chiSqTest(vec1, vec2)
+#+end_src
