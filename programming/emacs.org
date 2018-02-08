@@ -106,3 +106,12 @@ The plaintext format for links in org-mode
 Turn off org mode syntax for "this text"
 *** Back
 ="this text"=
+** emacs tramp file                                                    :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+Use tramp for remote editing of a file in emacs
+*** Back
+C-o (find file)
+/ssh:user@server/path/to/file
