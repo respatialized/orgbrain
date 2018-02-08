@@ -33,3 +33,13 @@ Get the type of a value v in clojure
 #+begin_src clojure
 (class v)
 #+end_src
+** set up a dynamic sketch in clj/quil                                 :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+In quil, set up a dynamic sketch in clojure from the REPL
+*** Back
+#+begin_src clojure 
+(use 'sketch.core)
+#+end_src
