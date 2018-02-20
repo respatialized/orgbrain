@@ -9,6 +9,9 @@ Functional programming and category theory on the JVM.
 #+END_description 
 
 A JVM language with strong foundations in category theory. Used often for distributed data-intensive applications with frameworks like Akka, Storm, and Spark. 
+* Spark: The Definitive Guide
+Matei Zaharia's kitchen-sink book.
+
 * Apache Spark
 
 #+BEGIN_description 
