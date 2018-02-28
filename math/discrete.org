@@ -28,22 +28,3 @@ It was proven that the relaxed solution of k-means clustering, specified by the 
 #+END_QUOTE
 
 Component interpretations are important here because they allow you to make sense of the positive and negative numbers in the higher-dimensional cluster mean space. Each vector corresponds to a cluster mean. Each successive number within each vector, then, is a point along the axis created by the principal component. So, for example, the first principal component in the data was "Low Income" - so anything with a negative value for the first value in the cluster mean vector would be, intuitively "Higher Income." 
-* Data Science Deck :deck:
-** k-means step                                                        :note:
-   :PROPERTIES: 
-   :ANKI_NOTE_TYPE: Basic
-   :ANKI_NOTE_ID: 1517330514396
-   :END: 
-*** Front
-in each refinement step of k-means, the cluster is updated by taking a ______ from the assigned points
-*** Back
-centroid (which is a linear combination of the points' features) 
-** chi-squared probability                                             :note:
-   :PROPERTIES:
-   :ANKI_NOTE_TYPE: Basic
-   :ANKI_NOTE_ID: 1517940754388
-   :END:
-*** Front
-In a chi-squared test, what does the p-value measure the probability of?
-*** Back
-The difference between the observed and expected distribution happening by chance

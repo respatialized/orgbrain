@@ -1,0 +1,552 @@
+* Scala                                                                :deck: 
+** first n                                                             :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330349906
+   :END:
+*** Front
+    get first n elements of sequence in scala
+*** Back
+#+begin_src scala  
+seq.take(n)
+#+end_src
+** concat sequences                                                    :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330350091
+   :END:
+*** Front
+    combine two sequences in Scala
+*** Back
+#+begin_src scala 
+seq1 ++ seq2
+#+end_src
+
+** string from seq scala                                               :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330350305
+   :END: 
+*** Front
+join a sequence with a delimiter in scala
+
+*** Back
+~seq.mkString(delim)~
+** scala elementwise comparison                                        :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330350490
+   :END: 
+*** Front
+get the element-wise comparison of two sequences in scala
+*** Back
+~seq1.deep == seq2.deep~
+** scala nested loop                                                   :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330350709
+   :END: 
+*** Front
+construct a nested loop in scala
+*** Back
+~for (x <- xs; y <- ys) {}~
+** create a list by repeating in scala                                 :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330350893
+   :END: 
+*** Front
+Repeat item i n times to form a list in scala
+*** Back
+#+begin_src scala
+List.fill(n)(i)
+#+end_src 
+** get the current timestamp in scala                                  :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330351133
+   :END: 
+*** Front
+Get the current timestamp in Scala (and Java)
+*** Back
+#+begin_src scala
+LocalDateTime.of(Calendar.getInstance.getTime.toInstant, ZoneId.of("America/New York"))
+#+end_src  
+It has to be a new calendar instance!
+** top class in scala                                                  :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1519849321411
+   :END:
+*** Front
+    The class at the root of Scala's class hierarchy
+*** Back
+    ~Any~
+** Scala Paradigms                                                     :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Cloze
+   :SOURCE:   [[http://docs.scala-lang.org/tour/tour-of-scala.html][Scala Official Introduction]]
+   :ANKI_NOTE_ID: 1519849321823
+   :END:
+*** Text
+    In Scala, every value is {{c1:: an object}}, and every function is {{c2::a value}}.
+*** Extra
+** vals are what?                                                      :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE:   [[http://docs.scala-lang.org/tour/tour-of-scala.html][Scala Official Introduction]]
+   :ANKI_NOTE_ID: 1519849322059
+   :END:
+*** Front
+    Can you reassign a ~val~ in Scala?
+*** Back
+    No
+** Explicit type declaration                                           :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE:   [[http://docs.scala-lang.org/tour/tour-of-scala.html][Scala Official Introduction]]
+   :ANKI_NOTE_ID: 1519849322249
+   :END:
+*** Front
+    Explicitly assign a type to a ~var~
+*** Back
+    ~var i: Int = 3~
+** Lambda structure                                                    :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Cloze
+   :ANKI_NOTE_ID: 1519849322439
+   :END:
+*** Text
+    The basic structure of an anonymous function in Scala is:
+    ~({{c1:: parameters)}} => {{c2::expression}}~
+*** Extra
+** function/method                                                     :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE:   [[http://docs.scala-lang.org/tour/tour-of-scala.html][Scala Official Introduction]]
+   :ANKI_NOTE_ID: 1519849322632
+   :END:
+*** Front
+    Does ~def~ define a function or a method?
+*** Back
+    A method
+** Unit/void                                                           :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE:   [[http://docs.scala-lang.org/tour/tour-of-scala.html][Scala Official Introduction]]
+   :ANKI_NOTE_ID: 1519849322866
+   :END:
+*** Front
+    The return value of a function with no meaningful return value
+*** Back
+    ~Unit~
+** Case class comparison                                               :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE:   [[http://docs.scala-lang.org/tour/tour-of-scala.html][Scala Official Introduction]]
+   :ANKI_NOTE_ID: 1519849323030
+   :END:
+*** Front
+    How are two case classes compared?
+*** Back
+    By their value
+** Case class mutability                                               :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE:   [[http://docs.scala-lang.org/tour/tour-of-scala.html][Scala Official Introduction]]
+   :ANKI_NOTE_ID: 1519849323191
+   :END:
+*** Front
+    Can you modify a case class?
+*** Back
+    By default, no.
+** singletons                                                          :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE:   [[http://docs.scala-lang.org/tour/tour-of-scala.html][Scala Official Introduction]]
+   :ANKI_NOTE_ID: 1519849323458
+   :END:
+*** Front
+    Declare a singleton called "Orb"
+*** Back
+#+BEGIN_SRC scala 
+object Orb {
+// values and methods go here
+}
+#+end_src
+** a use for traits                                                    :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE:   [[http://docs.scala-lang.org/tour/tour-of-scala.html][Scala Official Introduction]]
+   :ANKI_NOTE_ID: 1519849323651
+   :END:
+*** Front
+    How would you build a class out of more generic reusable values and methods?
+*** Back
+    By using traits.
+** Core application logic                                              :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE:   [[http://docs.scala-lang.org/tour/tour-of-scala.html][Scala Official Introduction]]
+   :ANKI_NOTE_ID: 1519849407987
+   :END:
+*** Front
+    In a basic Scala application, where would you put the main logic?
+*** Back
+#+BEGIN_SRC scala
+object Main {
+  doSomething()
+}
+#+END_SRC
+
+* Spark                                                                :deck: 
+** udf on list of columns                                              :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330296324
+   :END:
+*** Front
+    apply a udf to a list of columns in spark
+*** Back
+#+begin_src scala 
+var tempdf = df
+cols.map{c => tempdf.withColumn(c, udf(col(c)))}
+#+end_src 
+** select column sequence                                              :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330296492
+   :END:
+*** Front
+select a sequence of column names in Spark
+*** Back
+#+begin_src scala 
+df.select(cols.head, cols.tail: _*)
+#+end_src
+
+** basic model                                                         :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330100262
+   :END:
+
+*** Front
+High-level summary of any Spark program
+
+*** Back
+1. represent data as collection of RDDs
+2. build up a series of lazy transformations on those RDDs
+3. perform actions to get the results of those transformations
+** spark row to sequence                                               :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330296951
+   :END: 
+*** Front
+Convert a Row to a sequence in Spark
+*** Back
+#+begin_src scala
+Row.toSeq 
+#+end_src
+** spark join by row number :note:
+:PROPERTIES:
+:ANKI_NOTE_TYPE: Basic
+:ANKI_NOTE_ID: 1517936166278
+:END:
+
+*** Front
+
+Get the row number of a dataframe in spark
+
+*** Back
+
+#+begin_src scala 
+df.rdd.zipWithIndex
+#+end_src 
+
+** count null values in a spark column :note:
+:PROPERTIES:
+:ANKI_NOTE_TYPE: Basic
+:ANKI_NOTE_ID: 1517936166520
+:END:
+
+*** Front
+
+Find the count of null values in column "x" of a DataFrame df
+
+*** Back
+
+#+begin_src scala
+df.filter(df("x").isNull).count()
+#+end_src
+
+** filter out the NaN values in a Spark dataframe :note:
+:PROPERTIES:
+:ANKI_NOTE_TYPE: Basic
+:ANKI_NOTE_ID: 1517936166738
+:END:
+
+*** Front
+
+Filter the NaN values out of column y in a Spark DataFrame
+
+*** Back
+
+#+begin_src scala 
+val filteredDF = df.filter(!df("y").isNaN)
+#+end_src 
+
+** spark drop all nulls :note:
+:PROPERTIES:
+:ANKI_NOTE_TYPE: Basic
+:ANKI_NOTE_ID: 1517936166950
+:END:
+
+*** Front
+
+Get rid of any rows with null or NaN values from a df in Spark
+
+*** Back
+
+#+begin_src scala
+df.na.drop()
+#+end_src
+
+** spark chi-squared two vectors                                       :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :CREATED: <2018-02-06 Tue>
+   :ANKI_NOTE_ID: 1518118509892
+   :END: 
+*** Front
+Compare the distributions of two vectors using a chi-squared test in Spark
+*** Back
+#+begin_src scala 
+Statistics.chiSqTest(vec1, vec2)
+#+end_src
+** aws s3 credentials in bucket path                                   :note:
+:PROPERTIES:
+:CREATED:  <2018-02-15 Thu>
+:ANKI_NOTE_TYPE: Basic
+:ANKI_NOTE_ID: 1519829628284
+:END:
+
+*** Front
+
+Send AWS S3 credentials with a s3 bucket path on databricks / spark
+
+*** Back
+
+s3a://ACCESS_KEY_ID:SECRET_ACCESS_KEY@full_bucket_name/path/to/file
+
+* Emacs                                                                :deck: 
+** remove agenda filter                                                :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1516568999718
+   :END:
+
+*** Front
+remove the filter from emacs/org-agenda
+*** Back
+|
+** dired sort switch                                                   :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1516568999923
+   :END:
+
+*** Front
+switch buffer sorting modes in emacs/dired
+*** Back
+s
+** variable name                                                       :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1516569000084
+   :END:
+
+*** Front
+find the name of a variable in emacs
+
+*** Back
+M-x describe-variable
+** magit history                                                       :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330379270
+   :END: 
+*** Front 
+ Show a repo's history in magit
+*** Back
+    "l l"
+(that's "L", but lowercase)
+** org agenda bulk command in emacs                                    :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330379456
+   :END: 
+*** Front
+In emacs' org-agenda, execute a bulk command on marked files
+*** Back
+"B"
+** clock into a task from org-agenda                                   :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330379669
+   :END: 
+*** Front
+Clock into a task from org-agenda
+*** Back
+"I"
+(that's a capital "i")
+** cider get buffer namespace                                          :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330379858
+   :END: 
+*** Front
+In CIDER/emacs, jump into the buffer's clojure namespace
+*** Back
+M-x cider-repl-set-ns
+** org agenda priority :note:
+:PROPERTIES:
+:ANKI_NOTE_TYPE: Basic
+:ANKI_NOTE_ID: 1517936107413
+:END:
+
+*** Front
+
+Set the priority of an item in org agenda
+
+*** Back
+
+"," or "-"
+
+** org link format                                                     :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1518118450414
+   :END: 
+*** Front
+The plaintext format for links in org-mode
+*** Back
+=[ [link url][description] ]=
+(without spaces)
+** override org syntax                                                 :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1518118450741
+   :END: 
+*** Front
+Turn off org mode syntax for "this text"
+*** Back
+= "this text" = (without spaces)
+** emacs tramp file                                                    :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1518118450982
+   :END: 
+*** Front
+Use tramp for remote editing of a file in emacs
+*** Back
+C-o (find file)
+/ssh:user@server:path/to/file
+** filter by top-level headline in org-agenda                          :note:
+:PROPERTIES:
+:ANKI_NOTE_TYPE: Basic
+:ANKI_NOTE_ID: 1519829668647
+:END:
+
+*** Front
+
+Filter by top-level headline or project in org-agenda
+
+*** Back
+
+"^"
+
+** org agenda views                                                    :note:
+:PROPERTIES:
+:ANKI_NOTE_TYPE: Basic
+:ANKI_NOTE_ID: 1519829668859
+:END:
+
+*** Front
+
+Toggle the views in org agenda
+
+*** Back
+
+"v"
+
+** org italics                                                         :note:
+:PROPERTIES:
+:ANKI_NOTE_TYPE: Basic
+:ANKI_NOTE_ID: 1519829669051
+:END:
+
+*** Front
+
+Make "text" italic in org mode
+
+*** Back
+
+Wrap "text" in slashes
+
+* Clojure                                                              :deck:
+** iterable clojure                                                    :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330487212
+   :END: 
+*** Front
+Check if a value is sequential in clojure
+*** Back
+#+begin_src clojure
+(sequential? s)
+#+end_src 
+** get the type of a value in clojure :note:
+:PROPERTIES:
+:ANKI_NOTE_TYPE: Basic
+:ANKI_NOTE_ID: 1517936213844
+:END:
+
+*** Front
+
+Get the type of a value v in clojure
+
+*** Back
+#+begin_src clojure
+(class v)
+#+end_src
+** set up a dynamic sketch in clj/quil                                 :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1518118489452
+   :END: 
+*** Front
+In quil, set up a dynamic sketch in clojure from the REPL
+*** Back
+#+begin_src clojure 
+(use 'sketch.core)
+#+end_src
+* Data Science                                                         :deck:
+** k-means step                                                        :note:
+   :PROPERTIES: 
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517330514396
+   :END: 
+*** Front
+in each refinement step of k-means, the cluster is updated by taking a ______ from the assigned points
+*** Back
+centroid (which is a linear combination of the points' features) 
+** chi-squared probability                                             :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1517940754388
+   :END:
+*** Front
+In a chi-squared test, what does the p-value measure the probability of?
+*** Back
+The difference between the observed and expected distribution happening by chance
