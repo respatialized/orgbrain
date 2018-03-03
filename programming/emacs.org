@@ -1,7 +1,0 @@
-
-* Emacs Lisp
-  :PROPERTIES:
-  :ID:       907fcaa0-28e0-4255-8f84-12b76570c811
-  :BRAIN_PARENTS: 6464d5a9-338d-4cc3-a58d-7337f2d459a6
-  :END:
-

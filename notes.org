@@ -1,0 +1,721 @@
+* Programming
+** Apache Spark
+*** Don't throw information away.
+
+Monitor the size of your tables before IO operations. Get the size of everything before and after joins. Not doing this means giving up the chance to develop intuition about how effective your queries are and why they might not work.
+
+*** Normalize data in SQL
+
+Especially when working across various scales, data normalization is relatively easy to accomplish in pure SQL and will aid in visualizing aggregate results.
+*Subset and Test Joins*
+Instead of waiting for a whole table to join on another big one, why not try `SELECT ... LIMIT 500 JOIN SELECT ... LIMIT 500` instead?
+
+*** Avoid Hidden State
+
+This is a big one when working in notebooks. Order cells sequentially and separate initial work from refactor/cleanup by using sections and moving cells between them.
+
+*** Always Assume Your Code Might Become Part of a Pipeline
+
+This doesn't mean that every query you write needs to be hand-tuned for optimum performance from the get-go, but wrapping things in functions and documenting those functions will help you (or someone else) use them in the future.
+
+*** Align notebook sections with JIRA and/or Org-mode
+
+A notebook is much easier to organize when creating and much easier to search through when revisiting when the names for things match up with your notes/todos!.
+
+*** Shuffles and out-of-memory errors
+
+I had a large join repeatedly fail because it tried to shuffle too much data through the cluster's memory. Coalescing the DataFrame made the job take much longer, but it actually succeeded when I ran it.
+
+Overall, this was the first time I've encountered a genuine scalar problem in Spark. (by scale here I mean roughly "the additional stuff that needs to happen so that more of the same thing can happen"). It behooves me to get a better handle on partition sizes in the future so I can avoid 15-20 minute trial and error cycles. 
+
+*** Mapping functions to rows rather than mapping functions to values in rows
+
+This is a much trickier problem than I originally anticipated. I keep getting caught up in the static types. In the end I took advantage of pyspark's dynamic types to pull the right values out of the udf.
+
+*** testing dataframes
+:PROPERTIES:
+:CREATED:  [2017-10-27 Fri 09:17]
+:END:
+
+when testing code written for dataframes, it's very important to think of toy examples of things that are invariant before and after the function is called and things that ought to be invariant under the function.
+
+** Clojure
+*** Clojure from the Ground Up
+
+The tutorial begins where HTDP part 1 ends: with an overview of the left-to-right evaluation model of Lisp and the lambda calculus. It uses the (let ) expr to discuss the idea of functions being "expressions with unbound variables." I really appreciate the accessible way the fundamentals of computation are presented, which also allows for an immediate introduction to how concisely functions, lists, and the rest can be presented in a lisp-based language. When defining a function, the keyword & is reserved to allow an arbitrary number of arguments to be passed to a function which are then treated within the local scope as a list.
+
+Where you'd call help(obj) or obj?? in Python/Ipython respectively, you can call (doc fn) or (meta #'fn) in Clojure to get the docstring/metadata of a function. Memorize this, and the other things you need to memorize will work their way into your brain as they need to. Clojure also makes it very easy to read and learn from idimatic source code because you can call (source fn) on any function to get its source code. Unless it's a special form, like (let*) or (def). Others will bottom out in terms of Java types.
+
+*** 4clojure
+
+
+*** Incanter/Sparkling/Specter/Huri
+
+Clojure supports heavy-duty, non-tabular data science with these libraries.
+
+*** Thi.ng/Overtone/Quil
+
+ Clojure and org-mode together offer a workflow and live coding environment that surpasses processing.org on every level.
+
+*** Precept
+ A declarative programming framework to use expressive concepts to reduce the incidental complexity associated with building web apps. [[https://github.com/CoNarrative/precept][Github repo]].
+
+** Functional dependency flowchart
+A powerful idea: isolate the sequential dependencies from the parts that can be done in parallel through a 2d "recipe" flowchart. From [[http://www.lihaoyi.com/post/WhatsFunctionalProgrammingAllAbout.html][What's Functional Programming All About?]], by Li Haoyi, one of the best overviews of functional programming I've ever read.
+** Mixing programming paradigms can be difficult
+   :PROPERTIES:
+   :CREATED:  <2009-12-17 Thu>
+   :END:
+
+They always say "be prepared to throw one away." Mucking about trying to bolt functional code on to an imperative function felt like that, so it went much faster when I started over again.
+
+** Learn Every Language With This One Weird Trick
+   :PROPERTIES:
+   :CREATED:  <2017-08-23 Wed>
+   :END:
+
+I really learned the power of the design recipe when trying to parse out the values of the data dictionary in Scala. I managed to work more productively in a language I haven't learned yet than I often do in Python, a language I ostensibly know. 
+
+** FRP DJ notes
+   :PROPERTIES:
+   :CREATED:  [2017-11-30 Thu 09:28]
+   :END:
+
+a music visualizer has an attractive set of properties that lend it well to representation in a FRP system:
+
+the sound input is a continuous signal– a continuous vector of frequency magnitudes. FFT can be used to discretize it at desired intervals.
+
+abstract time (e.g. separating the playback from the computation of values that are used to render the animation) allows for interesting effects like "ramping" – pulling the animation's progress away from the music currently playing and then speeding it back up to bring it in time with the music again
+
+v1
+a visual V (discrete) is a function of a sound S (continuous), quantized via FFT (discrete)
+
+v1 is as far as my initial experiments with music visualization ever got.
+
+v2
+a visual V is a function of a sound S and time T (continuous)
+
+v3 
+a visual V is a function of a sound S, time T, and MIDI input M (discrete)
+
+v4
+a visual V is a function of sounds L, R (continuous), time T, and midi input M
+
+** [[https://github.com/matthiasn/talk-transcripts/blob/master/Kay_Alan/NonIncrementalFuture.md][Alan Kay: The Future Doesn't Have To Be Incremental]]
+
+Plan things five years out, because on any shorter timescale you're not going to give yourself the mental space to try anything interesting.
+
+** [[https://archive.org/details/Infoworld-1984-06-11?q%3Dportrait%2Bof%2Ba%2Bhigh%2Btech%2Bdreamer][Alan Kay: Portrait of a High-Tech Dreamer]]
++ "I thought children would be pretty good because they have no strong motivation for patience."
++ "...those who know Kay have speculated that MacBird based the idea [for Tron] on him."
++ One of his favorite books on education? /Teaching as a Subversive Activity/.
++ "Every media business goes through four phases: hardware, software, service, and way of life." Platform capitalism risks keeping us in the service phase of computation.
+** JupyterCon 2017
+*** Opening keynotes
+
+Fernando Perez: community is what enabled jupyter to grow beyond its python roots
+
+Peter Wang: the whole purpose of jupyter and conda is a substrate for continued innovation.
+
+Rachel Thomas: fast.ai shows that you need to code before you think you're ready to build real intuition.
+
+Wes McKinney: data science needs a language agnostic set of protocols and computing frameworks.
+
+Demba Ba: don't teach a class you wouldn't want to take yourself.
+
+*** Jupyter Frontends
+
+begins with the history of ipython/jupyter - why was it so useful in the first place? reproducibility, communication, and memory are three defining features.
+
+users increasing fastest outside USA - major users include LIGO, GenePattern, QuantEcon, Nature (journal), Buzzfeed – plus many more. 
+
+Challenges now: old web technology (jquery, no npm), api instability, lack of real time collaboration, large codebase, spec wasn't as language agnostic as originally intended.
+
+big takeaway: you can build or contribute to the jupyter frontend. the messaging protocol is similar to json in its text format. the protocol can send back plaintext and html (and even geojson) for rich media rendering. the same protocols describe cell state and the relationship between cell inputs and outputs. the entire notebook actually has a very simple structure. 
+
+(exporting from org-babel to jupyter might be easier than i thought)
+
+he continues by giving an overview of jupyter alternatives: jupyterlab, hydrogen, nteract, rodeo
+
+a common theme from responses to the questions: a plea for documented schemas.
+
+*** Music and Jupyter
+
+the topic comes out of Carol Willing's experience with Fab Lab, a makerspace in San Diego. 
+
+"Learning results from what a student does and thinks and only what the student does and thinks." - Herbert Simon
+
+nearly everyone grasps music on some intuitive level. AP CS is changing to incorporate more real world interests - female and minority participation has skyrocketed recently. 
+
+As Carol learned Python, the music21 library caught her interest because of the tag: 
+"in <=5 lines of code you can complete meaningful tasks in music research." the notebooks, when combined with the subject matter, gave people an intuition for computing that they never had before. it combined creativity and cross-cultural appeal to foster a sense of lifelong learning. by reducing the barriers to entry, notebooks allow people to more easily get the experience of being a beginner when trying out a different subject matter. 
+
+"a mistake is an opportunity to learn." - Benjamin Zander, conductor of the Boston Philharmonic
+
+replication can be taught intuitively to young children using notebooks before they even have a clear idea of how important it is to science.
+
+resources: music21, magenta (tensorflow for music generation), think dsp, extempore, Ann Marie Thomas - visualizing music
+
+jupyterlab supprts a repl for much better scratchpad 🙌🙌🙌
+
+music21 interfaces with MuseScore to allow for playback - and it even supports output to Braille!
+
+performance RNN on magenta might provide incidental music for your next cocktail party - or the infinite drum machine could give you an unexpected sample for your house track. 
+
+*** Beautiful networks made simpler with Jupyter
+
+Interactive graph analytics is vital for intuitive insight and uncovering patterns in data. Learning JavaScript was too high a barrier because it meant leaving the notebook context to visualize. So they wrapped existing graph theory libraries (NetworkX) in a notebook/interactive context. Basically, the result is a networkX object displayed using SigmaJS. 
+
+*** From Beaker to BeakerX
+
+Matt Greenwood is a physicist turned quant, like most early data scientists. Beaker/BeakerX is a crystallization of his views on how the scientific method can be made more collaborative. He also views the iterative feedback of the notebook experience to be an implicit endorsement of the notion that human reasoning is implicitly Bayesian.
+
+Beaker was designed to facilitate dialogue between researchers who use different programming languages. Publishing is still stuck in the paradigm of moveable type, even on the web - papers are frozen once published, cutting off the potential for easy replication. 
+
+"Knowing one language is totally insufficient to be a data scientist today." Beaker/BeakerX supports polyglot notebooks: different cells in the same notebook operating in different languages on the same data. 
+
+*** Jupyter, PixieDust & Maps
+
+Raj Singh: GIS/geospatial analyst turned developer. Hoping to make analysts more productive and allow more of the techniques siloed in GIS to be used by people with a more traditional analytics background. 
+
+Spoiler alert: it's bokeh/geoviews - dumps data spec to JSON and uses JS to display results inline. 
+
+But, it allows for in-notebook management of spark packages, which is pretty cool. So is the Scala Bridge, which lets you use Scala code from a Python notebook. 
+
+[... loading ...]
+
+PixieDust's interactions do feel more polished than bokeh, though. Except the part where the plot resets any time you adjust the opacity.
+
+"From jurisdictional to functional analysis of urban cores"
+
+The tight mapbox integration allows for much more graceful display of large polygon data than bokeh does.
+
+*** Kaggle Kernels
+
+The talk begins with an overview of Kaggle. Kernels combine a programming environment, datasets, community, and computing infrastructure - all the ingredients you need to grow as a data scientist. (including private kernels for when your code isn't ready for prime time).
+
+#codespo
+
+It allows users to work with larger data than their laptop would ordinarily allow them to work with. Initially people hated the introduction of kernels, but later conceded that they learned a lot from being able to see others' kernels. Kernels increased iteration of code.  
+
+*** Opening Keynotes (Friday)
+
+Jeremy Freeman: JupyterHub and Binder can enable a new, faster form of iterative open science.
+
+William Merchan: Data governanace is one of the biggest factors responsible for the gap between the 99% of companies that think data science is important and the 22% that actually say they get real business value out of it.
+
+Lorena Barba: Jupyter comes out of the desire for reproducible science, but the interactivity (and potential for hidden state) can actually hinder truly reproducible science. Computational tools represent a form of "material intelligence" - a form of intelligence described long ago by the field of cybernetics. Push-button reproducibility does absolutely nothing to help the person reproducing the research learn anything from the process of reproduction.
+
+Andrew Odewahn: O'Reilly media hopes to build a new form of computational publishing: from a git repo with code and a dockerfile to a hosted environment where the code can be executed. 
+
+Brett Cannon: OSS needs community, but it's not providing the support to people that genuine community requires. The elephant in the room is the famously abusive Linus Torvalds. Rule of thumb: don't write anything you wouldn't want your boss or your parents to read!
+
+Nadia Eghbal: Supporting OSS means recognizing that people have changing motivations for staying with a project over time. Money shouldn't replace motivation, but should instead be used to figure out how best to motivate people to do what they already wanted to do. 
+
+*** Model Interpretation Guidelines for the Enterprise
+
+Goal: everyone should understand the capabilities of Jupyter for putting humans in the loop for interpretable models.
+
+Interpretation overlaps with model evalutation - what interpretability means depends at least partially on the objective function we've chosen to optimize. Interpretation can help avoid overfitting. It also helps in exploring and discovering latent or hidden feature interactions, understanding model variability, model comparison, and building domain knowledge. 
+
+Model interpretation is essential for explaining a decision made by an automated system and testing for discriminatory behavior of a model.
+
+Interpretability is often in conflict with accuracy - because development resources are needed to make out of the box models interpretable, simpler models are chosen for interpretation. Skater aims to solve this by providing a model & language agnostic framework for interpretation. It supports both global interpretation of the feature space and local interpretation of specific examples of decision boundaries. 
+
+I think this could have long-term value for any organization using models to make decisions - people without a strong math background could gain insight into the rationale behind those decisions. 
+
+At SITO, for instance, people using the planner could use model interpretation to see (if they're so inclined) why a modeled segment is relevant to their goals.
+
+*** Jupyter and the changing rituals around computation
+
+Because of Berkeley's role in the history of ipython/jupyter, ethnographers there have a unique change to get a ground zero view of how these technologies are changing practices around computation.
+
+Practices around jupyter notebooks run the gamut from personally documented code, a new form of pair programming, to huge groups following a computational narrative as a notebook is run through or is written. We've heard a lot about how notebooks enable a new form of communication (as data transmission, per James Carey), but less about how the notebooks enable a new form of communication as ritual (also per Carey). So when we consider these new rituals, we also need to consider the roles, responsibilites, and contexts created around these communicative rituals (very easy example: talking for 30 minutes straight as a conference speaker versus talking for 30 minutes straight during dinner). The "high ceremony" of interpretation of the written word in an era before mass literacy can help us understand the rituals of communication in an era before new computational modes of communication haven't yet taken their full form. It can also help us think about how it might be once our society achieves mass fluency in the medium of computation and modeling. 
+
+The example he goes into at length with Jupyter specifically is a series of hackathons/workshops called "The Hacker Within," organized as a knowledge-sharing group around notebooks produced by volunteers within the group. It begins with a more traditional mode of presentation, but then throughout the workshop, the interactivity of the notebook allows people to fluidly switch to an environment where people can ask questions and make changes to the starting material that the speaker began with. 
+
+Next example was the UW Data Science Incubator: people use the notebooks as a scaffold to document their process of reasoning and communicate it to the person they're speaking with. Trying to use the jupyter notebook as part of standups didn't go well (given the purpose of standups as quick coordination mechanisms), indicating that they're better suited to sharing knowledge in depth and facilitating questions than quickly issuing commands or suggesting next actions. 
+
+The next section dealt with the recurring idea in the context of jupyter of mess. As in my own thoughts about the "mess of hidden state" that notebooks can fall into if there's too much undirected experimentation. The comparison of one's own building and refining a notebook with another's polished and published notebook is a big source of impostor syndrome ("I woke up like this"). Resistance to the use of the notebook might come from the fact that the roles and processes surrounding the editing of a notebook haven't been fully worked out because it's a very young medium of communication. The face to face interaction facilitated by notebooks really helps people test out and refine the latent ideas in a notebook and get them ready for publication for a wider audience.   
+
+"the tyranny of structurelessness" - structure never really goes away - it's just rendered invisible. So studying rituals of communication might help teams better make their process explicit so it doesn't alienate or confuse newcomers to the community.
+
+My question: what kinds of values do you see emerging from and expressed through these new communicative rituals?
+
+The most meta/self-reflexive q/a session I've ever been in.
+
+Until it got derailed into a sideshow about data governance and "best practices." Blegh.
+
+*** Building a powerful data science IDE with Jupyter Lab
+
+Goal: domain-specific data science IDE. Extremely standard IDE features: syntax highlighting, autocomplete, debugger, data/environment view, notebook support. 
+
+Integration of Monaco editor (VS Code). 
+
+I would have liked to learn more about the rationale behind the design process rather than just a tour/ad for R-Brain. 
+
+*** Defactoring Pace of Change: Reviewing Computational Research in the Digital Humanities
+
+Digital humanists study digital culture and study culture digitally. Examples include Orbis, Google maps for ancient Rome, close reading of code, examinations of how code and writing interact with and change each other.
+
+Digital humanists can "yak and hack" - they can leverage both programming and critical theory to pose unique questions about what technology is doing and where it's going. For digital humanists, the notebook is less important for reproducibility and more important for making visible the "code work" of scholarship and asking methodological questions of a given paper. 
+
+Konrad Hinsen outlaid a software stack for computational science that goes from general-purpose computational tools (at the foundation) to bespoke code (as the most customized and individual). 
+
+"Pace of change" was a scientific paper that was taken apart and recomposed into a Jupyter notebook which contained both a close reading and a "close computation" - a human and machine readable document. 
+
+Better to read the full paper/notebook when I'm not distracted by the wild antics of facebook offering poisoned fruit in the form of trendy front end libraries! (https://react-etc.net/entry/apache-foundation-bans-use-of-facebook-bsd-patents-licensed-libraries-like-react-js)
+
+*** UX Test for JupyterLab
+
+Looks pretty cool! Still needs to get some issues worked out with the window tiling. 
+
+*** Data Science Apps: Beyond Notebooks
+
+Begins with an overview of the Jupyter architecture. What do you need to do to build a narrative structure in a different format than a notebook? First, you need to understand the websockets and https api endpoints that the notebook uses to communicate with the server. The jupter-kernel-gateway library makes it easy to abstract over these protocols and build your own front-end! 
+
+The killer app would be to deploy a machine learning model on a jupyter kernel server and then use the kernel gateway to build an API for an actively running model for retraining/parameter tuning purposes. 
+
+Building an interface to the model validation jupyter app took only 3 lines of JQuery because of the high-level abstractions provided by the kernel gateway. Pretty wild. 
+
+*** Democratizing Access to Open Data Through Open Computational Infrastructure
+
+Yuvi Panda works at Berkeley and has root access to Wikimedia.
+
+Open data still takes too much effort to deal with! What can we do about that? 
+
+The animating force behind wikipedia - improvement through a constant stream of contributions from many people without demanding credentials - can be used to animate a better vision of democratized open data.
+
+"Open access doesn't mean you're like Twitter and you let nazis use your platform." "We deal with abusers by banning them. And then we keep banning them."
+
+Be as public as possible as soon as possible, with as many hyperlinks to previous states of the analysis as possible. So in the notebook, that means you have a shareable link to the notebook ready to go from the first line of code. The collaborative nature means that authorship and even attribution needs to be discarded for the sake of getting the data processing out there into the world. 
+
+This means that many people don't have to do the obnoxious grunt work of parsing the XML structure of the existing open data - they can just import the data cleaning functions from other notebooks and get going right away. A lot of people just get by with copy/pasting SQL from other queries, ignoring the words they don't understand, and changing the ones they do understand until they get the results. 
+
+Reppin' that Marx tho - talking about how building bots has been essential to the success and stability of Wikipedia. But bots are hard to make! There's a lot of incidental complexity there, making it hard to actually do what you want to do. 
+
+Endgame: an open, public, low cost platform that eliminates accidental complexity.
+
+
+
+
+** Alan Kay on technopoly
+   :PROPERTIES:
+   :author:   Alan Kay
+   :source:   Watch What I Do: Programming By Demonstration
+   :END:
+
+ In a technopoly in which we can make just about anything we desire, and almost everything we do can be replaced with vicarious experience, we have to decide to do the activities that make us into actualized humans. We have to decide to exercise, to not eat too much fat and sugar, to learn, to read, to explore, to experiment, to make, to love, to think. In short, to exist.
+
+ Difficulties are annoying and we like to remove them. But we have to be careful to only remove the gratuitous ones. As for the others--those whose surmounting makes us grow stronger in mind and body--we have to decide to leave those in and face them.
+
+ Alan Kay, foreword to "Watch What I Do: Programming By Demonstration."
+
+ http://acypher.com/wwid/FrontMatter/index.html#Foreword
+
+** Conal Elliott on Real FRP
+ "For me, the motivation is aesthetic, but often aesthetics turn out to be quite practial."
+ https://www.youtube.com/watch?v=j3Q32brCUAI
+
+** home location modeling
+
+the more accurate the model is, the fewer unintended consequences it might have, and the less likely negative consequences are to be my fault rather than the fault of the people using the platform.
+
+** 4Clojure exercise 31 Notes
+   :PROPERTIES:
+   :CREATED:  <2018-02-23 Fri>
+   :END:
+
+my function doesn't work because i don't have a way of comparing the "left hand" and "right hand" of the cons expression. I thought that ~cons~ ing a conditional would work, but it didn't. Alternatively, I could try changing up RTL/LTR evaluation to see if that solves the problem, but I don't think it will.
+
+** 4clojure versioning issue
+:PROPERTIES:
+:CREATED:  [2018-01-26 Fri 09:44]
+:END:
+
+I can't check my work against the actual web app because it runs clj 1.4! I must be using a lot of newer built-ins. Rats.
+
+** pure distributed blockchain?
+CLOSED: [2018-02-06 Tue 11:46]
+:PROPERTIES:
+:CREATED:  [2018-01-31 Wed 03:16]
+:END:
+
+if you had a pure function that was reversible, could you have a mapping from a function's output to (the hash of) its source code?
+
+** comprev: dynamicland
+
+"objects communicate by making claims about the world, and responding to claims of the objects around them"
+
+This alone gives programming a much firmer ontological basis than abstractions like functions, variables, expressions. It's making interaction with the world a basic unit of computing instead of something that needs to be hacked into existence.
+
+** clj destructuring
+   :PROPERTIES:
+   :CREATED:  <2018-02-07 Wed>
+   :END:
+
+
+the idea of binding names to an iterable expression like (range) took me a bit to wrap my head around, but I can already see that this capability can be used to very quickly cut through the cruft of parsing JSON or other structured data.
+
+** flat files and static documentation
+:PROPERTIES:
+:CREATED:  <2018-02-14 Wed>
+:END:
+
+When thinking about how strange it is that we still keep code in flat files, I realized that it's a big source of the reason why code and documentation get out of sync. If documentation could dynamically pull in parts of the codebase, or if those parts of the codebase could use static analysis to generate parts of the documentation, there'd be a much smaller gap between updating the code and updating the documentation.
+
+** jsonnet is just lisp
+:PROPERTIES:
+:CREATED:  <2018-02-27 Tue>
+:END:
+
+or is it a brilliant scheme to get people to start writing lisp [cosmic brain]
+
+** Traits in Scala
+:PROPERTIES:
+:CREATED:  <2018-02-28 Wed>
+:END:
+
+Traits are like generic properties that you can use to build classes out of a smaller set of primitive elements. Encourages /composition over inheritance/, a powerful idea in object-oriented programming.
+** BEM syntax
+:PROPERTIES:
+:CREATED:  [2018-03-01 Thu 18:55]
+:END:
+
+A powerful idea that unifies the visual and syntactic/code understandings of CSS by making relationships among hierarchy members explicit. Already I can see how powerful a Lisp might be at manipulating these structures.
+
+* Math
+** Reprojecting data to understand differences within it
+   :PROPERTIES:
+   :CREATED:  <2017-08-09 Wed>
+   :END:
+ I felt like my mental model of "the shape of data" improved while reading about the relative advantages and disadvantages of factor analysis and principal component analysis. I also learned that factor analysis does a better job of accounting for noise than PCA, but it is generally used when you already have an underlying theory for the process you're trying to identify through latent variables. 
+** Are your variables on the same scale?
+   :PROPERTIES:
+   :CREATED:  <2017-12-04 Mon>
+   :END:
+ Today, I learned that correlation coefficients can easily fail if there's a nonlinear relationship between two variables. Parcel size and population density appear to have a very robust nonlinear negative correlation, but I would have missed it if I hadn't been reminded to plot the log by John. (A. B. P. Always. Be. Plotting.).
+
+** Brilliant: 2 of 3 distinct integers, added 3 ways :number-theory:
+
+All 3 sums cannot be prime.
+
+** Brilliant: An infinite stack of books on a table :infinite-series:
+
+Can be extended an infinite distance from the table's edge, because its center of gravity follows the harmonic series, which does not converge.
+
+** Brilliant: Inscribed polygons                                   :geometry:
+
+with an even number of sides: can have equal angles without equal sides.
+
+with an odd number of sides: have equal angles iff the sides are equal.
+
+** Devon D Sparks on virtual 3D worlds
+   :PROPERTIES:
+   :author:   Devon D Sparks
+   :source:   VPRI FONC mailing list
+   :END:
+
+ It's much more fun to go out into the real world, ask questions of it, and use  tools like pencils, paint, objects or mathematics to help find meaningful answers. One example comes from learning to draw: I remember being fascinated  by the ideas behind perspective drawing, and was humbled that such simple principles could have been hidden in plain sight for so long! After playing around with vanishing points, it seemed that there must be some very fundamental relationships between the points on the horizons and lines on the page. This gave way to an exploration of projective geometry, which I was fascinated to discover is an immensely powerful way of describing relationships -- from mechanical linkages to structural loads and conic sections. From here the lines on the page could be mapped to equations of lines, and from equations of lines to linear algebra. Finding these relationships in ordinary things was a great excitement, and though I've never used the knowledge to build any large CAD tool, my small experiments on paper and in silico have given me a new perspective that I'll happily hold for the rest of my life. To that end, I'd never want a computer to create a new world to live in, but instead be an aid to understanding the one right in front of me.
+
+** when doing K-means on PCA
+
+The centers are obtained by iteratively taking linear combinations of the principal components, which are themselves linear combinations of the original features
+
+** Cathy O'Neil on securities :political economy:
+   :PROPERTIES:
+   :author:   Cathy Brennan
+   :source:   Weapons of Math Destruction
+   :page:     43
+   :END:
+
+ Paradoxically, the supposedly powerful algorithms that created the market, the ones that analyzed the risk in tranches of debt and sorted them into securities, turned out to be useless when it came time to clean up the mess and calculate what all the paper was actually worth. The math could multiply the horseshit, but could not decipher it. 
+
+** geostatistical tests
+
++ I first got on this tear because I was thinking about how to compare the distributions of spatial data in two different datasets. It violates assumptions of independence (e.g. property values) and normal distributions, making it tricky to apply common tests to spatially distributed data.
++ The chi-squared test can be used in geography, but mostly for determining if the spatial distribution of data differs meaningfully from a random distribution. It does this by binning the data into grids and looking at the frequency of occurrences in each bin.
++ There's not a lot of literature out there on geostatistical hypothesis testing - my lack of solid results in googling was corroborated by [[https://books.google.com/books?id=KtsVAgAAQBAJ&pg=PA18&lpg=PA18&dq=hypothesis+testing+geostatistics&source=bl&ots=eZ1Jshwpdc&sig=ls5HCTUiyWbfy4PzglDk_9DSuOU&hl=en&sa=X&ved=0ahUKEwiR99Dt5KXZAhXCm-AKHQOcBdcQ6AEINTAC#v=onepage&q=hypothesis%2520testing%2520geostatistics&f=false][this passage]] from /Stochastic Modeling and Geostatistics/:
+"In particular, the geostatistical literature is almost void of references to tests of hypotheses..."
++ The Wilcoxon signed rank test might be a good one - take two pairs of samples and see if differences in their values are random or non-random.
++ Spatial Analysis Online has a [[http://www.spatialanalysisonline.com/HTML/index.html?statistical_methods_and_spatia.htm][good table]] describing the differences between various methods for spatial data analysis.
+* Built Environments
+** The Limits of the Organizing Model
+
+After reading "the limits of the organizing model", it occurs to me that market-rate tenants have difficulty forming MacAlevey's "spatially bounded constituencies" due to fear of landlord retaliation. They might fare better as "assembled constituencies", but there isn't often the mass discontent to build them.
+
+** "A Factor Analysis of Landscape Pattern and Structure Metrics"
+   :PROPERTIES:
+   :CREATED:    <2017-08-09 Wed>
+   :END:
+
+Ritters et. al. 1995
+A strong paper that identifies 5 main metrics that capture the variability within patches of landscape data. Particularly interesting is the condensation of these metrics into a small graphical symbol that can be placed on a larger map to compare landscapes on a larger scale.
+
+** Jacobin Issue 26: Earth, Wind, and Fire
+
+The failures to deal with climate change and the political backlash both have their origins in its apolitical treatment by the US federal government and transnational institutions. By retreating from politics, these institutions failed to build the large base of social support necessary to sustain large-scale shifts in the economy and society.
+
+I wish this issue wrestled more with the question of how to deal with skepticism on the part of the working class that is integral to the realization of a clean economy.
+
+** Cars vs. Transit (prompted by seeing a very tall man standing in the subway)
+
+cars: built for the average individual
+transit: built for literally everyone
+
+** betraying the revolution
+   :PROPERTIES:
+   :CREATED:  <2018-02-05 Mon>
+   :END:
+
+When listening to Dead Pundits' interview with Adaner Usmani, I was struck by their noting the endless appeal to "betraying the revolution" as an explanation of the failures of socialist history. It struck me that the reason why so many socialists rely on this as an analytical tool is because it allows them to always accuse their interlocutors of being like the traitor.
+
+** Praxis
+:PROPERTIES:
+:CREATED:  [2018-02-20 Tue 08:58]
+:END:
+
+You might think that you need to name a problem before you can act to solve it, but your daily practice limits the range of terms available to you.
+
+** International conference on geospatial semantics
+
+Some interesting papers in here: found it from "A Spatial User Similarity Measure for Geographic Recommender Systems"
+https://link.springer.com/conference/geos
+
+* Philosophy
+** Piotr Wozniak's 20 rules of formulating knowledge
+*** 1. Avoid learning anything without understanding it.
+*** 2.  Understand before committing to memory.  
+*** 3. Use a simpler model as a starting point for additional knowledge.
+*** 4. Make deliberate choices about how to simply represent knowledge.
+*** 5. Create blanks, then fill them in.
+*** 6. Use pictures, charts, and graphs to make connections.
+*** 7. Build your own mnemonic representations of concepts.
+*** 8. Create blanks in pictures, then fill them in.
+*** 9. Unordered collections are the hardest things to memorize.
+*** 10. Ordered collections are easier, but it's still better to avoid them.
+*** 11. Avoid creating memorized facts that conflict with other topics.
+*** 12. Simplify the wording of facts, to emphasize the real goal.
+*** 13. Make memorized information overlap with related memories.
+*** 14. Give yourself context clues from your own life.
+*** 15. Make your examples vivid.
+*** 16. Create topic-specific identifiers for domain information.
+*** 17. Redundancy is not an enemy of simplicity.
+*** 18. Source the information in a fact to memorize.
+*** 19. Date the information in a fact to memorize.
+*** 20. Focus on the most important knowledge.
+** Imre Lakatos SEP Entry
+
+Despite his conscious rejection of Hegel and dialectics, Lakatos' theory of progressive science as born out of sets of competing research programs eventually running into cases which force a rejection of their central methodologies strikes me as a pretty dialectical account of science. He argues that a full theory of scientific rationality cannot be achieved without understanding the development of science, preferably through attempts to rationally reconstruct that history on the basis of a solid theory of rationality. The better theory explains more of "good science" than its rivals. Thus there's an interesting reflexivity in the entire approach– he approaches competing theories in the philosophy of science much like competing theories in the history of science.
+
+* Art
+** Flickr commons finds
+*** [[https://www.flickr.com/photos/tags/bookid2encyclopaediaof00gwiluoft][An encyclopaedia of architecture, historical, theoretical, & practical.]]
+Patterns in architecture from an era on the cusp of modernism.
+*** [[https://www.flickr.com/photos/105662205@N04/][UC Berkeley Department of Geography]]
+Gorgeous film photos from a seasoned geographer, all around the world. Like a vintage NatGeo, but public domain!
+*** Het Nieuwe Instituut collection
+Gorgeous artifacts of Danish modernism [[https://www.flickr.com/photos/nai_collection/albums/with/72157627536100105][on Flickr]]. 
+
+** Position, orientation, magnitude
+:PROPERTIES:
+:CREATED:  [2018-02-19 Mon 16:47]
+:END:
+Fundamentals of flexible, modular generative art. If all display methods reference these state variables, then they can seamlessly be switched on the fly.
+
+* Music
+** A good day of dark house
+   :PROPERTIES:
+   :CREATED:  <2017-08-15 Tue>
+   :END:
+
++ Tunnelvisions - Tanami
++ Dark Sky - Domes
++ Chloé - BIS Podcast #896
++ Fort Romeau - Emulators (preview)
++ Chloé - The Dawn
+** Synthesis of my old playlist-making skills and my new(er) mixing skills
+   :PROPERTIES:
+   :CREATED:  <2017-09-01 Fri>
+   :END:
+
+Yesterday I noticed that my intuitive track-selecting skills had been honed by the act of picking the right sound for the Gauche Caviar spotify playlist. 
+** Studiologic sledge 2.0
+extremely knobby VA synth with full size keys for ~800. This is it - the one to save up for. Waldorf sound engine! USB connection! 24-voice polyphony! simple and expressive editing of the wavetable! arpeggiator!
+
+ Come to think of it, I recall its bright yellow appearance from the Xosar show (if that's not just wishful thinking).
+
+** Messing around with music
+ why not try using the beatstep pro to mess around with an app like Tracktion, just to make things fun?
+
+** Notes from the search for the ideal synth
+   :PROPERTIES:
+   :CREATED:  [2017-11-20 Mon 07:26]
+   :ARCHIVE_TIME: 2017-11-28 Tue 13:05
+   :ARCHIVE_FILE: ~/org/music.org
+   :ARCHIVE_CATEGORY: music
+   :END:
+
+ in my quest to find the reasonably priced full size keyboard that 'does it all'- aka has full midi i/o/thru, lots of knobs to directly manipulate sound, and has programmable patches, I've been lead to two options: the novation ks4 and the roland jx-305, with the korg kross serving as a backup.
+
+*** jx-305
+    :PROPERTIES:
+    :CREATED:  [2017-11-20 Mon 07:29]
+    :END:
+
+ pros:
+ weighted keys
+ would allow simpler setup by ditching sequencer and drum machine
+ built in groovebox functions
+ classic roland sounds including 808
+ less than $400
+ newly created patch editor
+
+ cons:
+ difficult to maintain
+ default patches sound cheesy and dated
+ doesn't always play nice with outboard gear
+ no usb connection
+
+*** ks4
+    :PROPERTIES:
+    :CREATED:  [2017-11-20 Mon 07:33]
+    :END:
+
+ pros:
+ cheap ($200)
+ decent range of sounds
+ knob-per-function layout with lots of osc parameters
+
+ cons:
+ hard to find other sellers
+ spotty hardware
+ no usb connection
+
+*** korg kross
+    :PROPERTIES:
+    :CREATED:  [2017-11-20 Mon 07:56]
+    :END:
+
+ pros:
+ new
+ analog sound engine
+ usb connectivity
+ sequencer
+ arpeggiator
+
+ cons: 
+ not a lot of knobs and sliders for real time control
+ price ($750)
+
+*** Yamaha mx-61
+    :PROPERTIES:
+    :CREATED:  [2017-11-20 Mon 09:26]
+    :END:
+
+*** roland juno ds61
+    :PROPERTIES:
+    :CREATED:  [2017-11-20 Mon 09:27]
+    :END:
+
+*** external audio
+    :PROPERTIES:
+    :CREATED:  [2017-11-20 Mon 10:24]
+    :END:
+
+ https://www.reddit.com/r/synthesizers/comments/4xhqlx/which_synths_for_processing_external_audio/
+
+** Justin strauss BIS mix
+:PROPERTIES:
+:CREATED:  [2018-02-26 Mon 12:45]
+:END:
+
+Extremely good one, plus lots of cool stuff coming up from him this year.
+
+** Pablo Bolivar & Sensual Physics - Traverse (Reprise)
+:PROPERTIES:
+:CREATED:  <2018-02-27 Tue>
+:END:
+
+Very good dub techno album.
+
+* Food
+** [[https://food52.com/recipes/64161-joy-the-baker-s-olive-oil-braised-chickpeas-more-or-less][Braised Chickpeas]]
+** [[https://cooking.nytimes.com/recipes/1017327-roasted-chicken-provencal][Roasted Chicken Provencal]]
+** [[https://food52.com/recipes/67751-chickpea-vegetable-bowl-with-peanut-dressing][Chickpea Vegetable Bowl With Peanut Dressing]]
+** [[https://food52.com/recipes/67675-sheet-pan-chicken-and-cauliflower-shawarma][Sheet Pan Chicken and Cauliflower Shawarma]]
+** [[https://food52.com/recipes/23760-spicy-thai-steak-salad][Spicy Thai Steak Salad]]
+** [[https://food52.com/recipes/67968-greens-beans-with-coconut-milk-and-spicy-cashews][Greens & Beans with Coconut Milk and Spicy Cashews]]
+** [[https://food52.com/recipes/20348-lamb-stew-with-butternut-squash][Lamb Stew with Butternut Squash]]
+** [[https://food52.com/recipes/11083-sherried-mushroom-clafoutis][Sherried Mushroom Calfoutis]]
+** Amazing cheese
+:PROPERTIES:
+:CREATED:  [2018-02-19 Mon 11:29]
+:END:
+
+La tur - Creamy yet dry cheese from caseificio dell'alta langa 
+
+* Reflections
+** learning as diversion vs learning to learn
+
+ the difference between these two is preparation and repeated application. Brilliant is a cool app, but it won't change the way I think unless i extend the lessons beyond their original statement.
+
+** Romantic Buddhism
+   :PROPERTIES:
+   :CREATED:  <2017-08-10 Thu>
+   :END:
+
+
+When reading about Buddhist modernism on Wikipedia, I came across Thanissaro Bhikku's contrast between Buddhist romanticism and traditional Buddhism's aims. My skepticism of the total renunciation (and metaphysics) of the Thai forest tradition had led me almost to that exact spot without realizing it. In as much as I don't see myself adhering to the five precepts, nor seeking total renunciation of sensory pleasure and would prefer something like the "undivided self" and "integration of experience" that characterize Buddhist romanticism, I think it does accurately characterize where I stand. But it also shows me that my viewpoint is hardly unique, and in particular it describes the Dharmapunx ethos very succinctly. Meditation has undoubtedly been one of the best things I've done for myself in recent years. And given that the practice predates Buddhism itself, I've never felt the need to firmly connect Buddhist teaching with the benefits of mindfulness. But the indelible mark left on me from listening to Thanissaro Bikkhu talk about ardency is a sense of restlessness in wanting to make myself more skillful. Which comes and goes like anything else - but the critical difference is that I can improve in reliably cultivating that sense in myself. 
+
+Put more simply, I suppose it means I am content to remain a beginner for a long time.
+
+** my application to Joe Edelman's human systems curriculum class
+
+worth remembering!
+
+*** What kind of social space design have you done in the past? (games, parties, apps, workshop exercises, etc)
+
+I have run housing education workshops, DJed parties, conducted wellness sessions for student activists, taught confidence-building and critical thinking lessons in ESL classes, chaired editorial meetings for an undergrad philosophy journal,  and served as secretary on the board of a tenants' union.
+
+*** If you could have a game or environment custom-designed to let you practice something particular in socializing, what would it be?
+
+I would want a social space that would allow me to practice being a facilitator of political agency: I want people to join me in a process of realizing that running the institutions that affect us is our (and everyone's) business. It would be an environment that allows us to see ourselves as those kinds of participants and gives us the chance to act accordingly.
+
+*** If you could have a ritual custom-designed to help you honor or celebrate or invoke some part of your life, what would you choose to honor/celebrate/invoke?
+
+    I would perform a ritual that allows me (and others) to enact the essential link between creativity and understanding. It's very easy for me to get caught up in what's essentially a "I need to download this knowledge" way of thinking about learning. But true understanding comes for me when I'm able to have a more expressive kind of learning that takes advantage of more capabilities than just memory.
+
+** logging off
+
+Even the slightest glimpse of 'online' is enough to bring me right back into the mode of thinking where I judge how good a leftist I am by what I imagine people might say about me for liking a certain writer.
+** distillation in writing
+:PROPERTIES:
+:CREATED:  [2018-02-01 Thu 09:34]
+:END:
+
+Right now I have a lot of quotations to work with. I can see the common thread between them, but others might not. I can distill the material by focusing on making these threads explicit.
+
+** values vs goals in org mode
+:PROPERTIES:
+:CREATED:  [2018-02-14 Wed 09:21]
+:END:
+
++ The idea is to make sure that projects are grounded in larger goals. 
++ The projects/next actions view is for immediate stuff- the reviews can live under the goals section to see a higher level view of progress. 
++ One idea: add a refile hook that automatically tags todos with the right goals when added to the subtree they correspond to.
++ if those tags exist, then you can filter the agenda view of the archive when reviewing a goal
++ Areas of focus support values, not explicit goals - but things under an area of focus  can still be associated with a project that has a discrete outcome
++ Thinking about it more, this lack of alignment between the "need to do" and felt experience of my values is a big part of why the to-do list gets stale over time.
+** Raise asks
+:PROPERTIES:
+:CREATED:  [2018-02-27 Tue 09:06]
+:END:
+
+25k - 85 -> 110
+
+Standing desk, second monitor
+
+Mention part time classes and leave of absence
+
+In all honesty, working at SITO has worked out far better than I anticipated. I didn't even expect the title of data scientist! But my work on the principal component analysis and clustering was the first time I proved to myself that I could do the real work of one. I acknowledge that a risk was taken on me; I think it's worked out for them. I want my salary to reflect my ability.

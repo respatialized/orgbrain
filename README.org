@@ -1,2 +1,20 @@
 * ORGBRAIN
 This repo contains my notes on most everything I'm trying to learn right now.
+
+A good way to think about using org-mode is: "is it a task, a fact, a note, or a concept?" A task doesn't go here - it goes in ~org~. A note is something that I found important at some point in time. A fact is something I need to remember (it goes into an Anki deck for spaced repetition). A concept is a distillation of information that comes once I've gained insight into a topic. 
+* Contents
+
++ notes.org
+A scattershot file containing lots of notes that used to live in way too many places. An archive of notes undertaken on projects, collected on the subway, while reading, wherever! Disorganization encourages creativity (in this file), so everything is flat.
+
++ Books (folder)
+A folder with the "deliberate practice" books. Those that I need to read with emacs (and a repl) open alongside.
+
++ books.org
+The file containing the notes on the books in the "deliberate practice" books. Needed as a separate file because org-noter requires the books to be a top-level headline.
+
++ concepts.org
+The file where distillation and concept mapping happens. Inspired by (and perhaps copied from) notes.org, a proper structure is more important for this file. 
+
++ decks.org
+The file where my flashcards are stored.

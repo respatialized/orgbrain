@@ -1,0 +1,89 @@
+* How To Design Programs
+** Part 1: Fixed-Size Data
+
+What did I learn?
+
+*** The Design Recipe
+
+When given a problem to solve, approach it like this.
+1. Create data definitions for the data consumed and produced by the function on the basis of previously defined data structures.
+2. Use these data definitions to create a function signature and header describing what the function does.
+3. Create a function template by adding all the variables consumed by a function to the body of the function with placeholders in between.
+4. Articulate examples of inputs and their desired outputs, and then build unit tests from those examples.
+5. Write the function.
+6. Test.
+7. Revise and repeat until the function passes all checks.
+
+*** Data Definitions
+
+Defining data used by a program helps clarify thoughts, both for translation into code and for one's own reasoning. Here's the general pattern:
+A PositiveNumber is a Number:
+- >0
+You can use this to create structs, as well:
+A PositiveVector is a Structure:
+(make-posvec PositiveNumber PositiveNumber)
+Following this set of guidelines constrains your reasoning by forcing you to reason purely in terms of previously defined data structures (see above) - an extremely generative constraint.
+
+*** Composition
+
+Every programming textbook talks about composing functions. But many of them spend all their time talking about data structures and none of their time talking about design as a process, so you're always left to refactor code into composable functions after the fact. The approach of HTDP is virtually guaranteed to reduce technical debt right from the start by making composition approachable and an everyday part of the process.
+
+*** The Lisp evaluation model
+
+It's deceptively simple: left-to-right substitution of expressions for their results. This is the language of the lambda calculus - the core of Lisp's enduring power and appeal.
+
+** Part 2: Arbitrarily Large Data
+*** <2017-09-20 Wed>
+
+Taking the subway home last night while working on the introduction to recursion in HTDP section two, I immediately felt like a very portable laptop was worth it when I quickly jumped ahead of the text to implement a recursive function that counted the size of a list and started to work on my own version of a map function. 
+
+When I got off the subway, however, I realized that my naive implementation of the map function would probably run into issues that quotation (e.g. the distinction between use and mention of a lisp expression) would be necessary to solve. I don't think quotation is in the "Beginning Student" language that the early sections use. 
+
+Still, a pretty good indication that the text does an excellent job portraying recursion as a powerful idea. 
+* Functional Programming In Scala
+** Chapter 1
+
+The chapter uses the example of a program to handle the buying of a cup of coffee to depict the notions of referential transparency and the substitution model in practice. A function is referentially transparent iff for all referentially transparent inputs it returns one and only one result. This property means that every expression in a pure function can be substituted for its result without changing the overall meaning of the function, facilitating the ability to locally reason about different parts of a function without worrying about how those parts interact with the rest of the function. These ideas seemed very intuitive after having completed HTDP intermezzo 1. 
+
+** Chapter 2
+
+The syntax of Scala is introduced through a tail-recursive function, which took me a fair bit to wrap my head around. I knew that they were desirable because they didn't have to add a new function to the call stack, but I didn't really "get it" until I had a fuzzy mental image like a series of cards being pulled from a stack as the function repeatedly applied its if-or-else rule to produce the factorial.
+
+* Weapons of Math Destruction :math:political-economy:
+** Chapter 1: Bomb Parts
+
+O'Neil introduces the book with the three constituent features of a WMD: damage, opacity, and scale.
+
+** Chapter 2: Shell Shocked
+
+O'Neil describes her path of disillusionment through finance and ad-tech, and in so doing seems to predict my future.
+
+** Chapter 3: Arms Race
+
+The US News and World Report's college rankings as WMD: their chief damage was the lack of affordability as a metric, but they also distorted the admissions process by incentivizing selectivity.
+
+** Chapter 6: Ineligible to Serve
+
+O'Neil uses discrimination against job applicants (on the basis of language skills or mental profile) to argue that the algorithms designed to identify "problematic" traits can be used either to help people in need, or to discriminate. What makes the difference is the goals and values in which the analyses are embedded.
+
+** Chapter 7: Sweating Bullets
+
+O'Neil argues that despite promises to change from the top, WMDs can very deeply embed themselves into the incentive structure of companies.
+
+** Chapter 8: Collateral Damage
+
+O'Neil outlines the game that SITO is looking to get into: consumer risk modeling.
+
+** Conclusion
+
+A cri de coeur for regulation in an industry that thrives on bullshit, opacity, and techno-utopianism.
+
+* The Stack
+  :PROPERTIES:
+  :AUTHOR:   Benjamin Bratton
+  :END:
+
+Address layer
+Universal addressability all but guarantees that multiple independent users and networks will have their own addressing schemas, intertwined but also incompatible with many others. Direct object to object communication without human oversight might surprise us with unexpected ecologies of objects communicating and exchanging resources in wholly novel ways.
+
+
