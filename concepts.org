@@ -1,3 +1,68 @@
+* Programming
+** Referential transparency
+   :PROPERTIES:
+   :ID:       0e0b4f4b-4175-49e7-85ed-c1c172c24354
+   :END:
+A key idea in functional programming, a language exhibits referential transparency if any valid expression in the language can be replaced by its output without changing the output of the program. 
+
+It turns out this is a conventional definition that [[https://stackoverflow.com/questions/210835/what-is-referential-transparency/11740176#11740176][is at odds with the philosophy of language and semantics]] that informed functional programming in the first place.
+** Homoiconicity
+   :PROPERTIES:
+   :ID:       b8b8d4d1-c3c6-429d-8c62-38f72de4dc16
+   :BRAIN_FRIENDS: 6464d5a9-338d-4cc3-a58d-7337f2d459a6
+   :END:
+A language is homoiconic if the expressions employed by a language are also data structures within a language. Concisely described using the phrase "code as data," it means that features of the language itself can be transformed by operators within the language. 
+** Functional programming
+   :PROPERTIES:
+   :ID:       67069e3b-0693-4cd6-8429-949de721e47e
+   :BRAIN_CHILDREN: 295a3ef6-10e2-4faf-95ee-88bcbc248b92 2eb6c5b5-f6fa-4beb-bce2-7adaa5d26c89
+   :END:
+
+#+BEGIN_description 
+Programming that relies on pure functions and avoids state.
+#+END_description 
+** Lisp
+   :PROPERTIES:
+   :ID:       6464d5a9-338d-4cc3-a58d-7337f2d459a6
+   :BRAIN_FRIENDS: b8b8d4d1-c3c6-429d-8c62-38f72de4dc16
+   :BRAIN_PARENTS: programming/programming:Languages
+   :BRAIN_CHILDREN: 907fcaa0-28e0-4255-8f84-12b76570c811
+   :END:
+A language noted for its concise syntax and semantics, Lisp programs operate by invoking transformations on lists of data. The name "Lisp" derives from "List Processing". Its simplicity, power, and enduring popularity derive in large part from its foundation in the lambda calculus.
+*** Clojure
+    :PROPERTIES:
+    :ID:       2eb6c5b5-f6fa-4beb-bce2-7adaa5d26c89
+    :BRAIN_PARENTS: 67069e3b-0693-4cd6-8429-949de721e47e
+    :END:
+
+A lisp that runs on the JVM.
+
+** Python
+   :PROPERTIES:
+   :ID:       876aaeb0-7fa7-4d48-8d84-3d07f5b66909
+   :END:
+
+#+BEGIN_description 
+Everyone's favorite first and general-purpose programming language.
+#+END_description 
+
+** Scala
+   :PROPERTIES:
+   :ID:       295a3ef6-10e2-4faf-95ee-88bcbc248b92
+   :BRAIN_PARENTS: 67069e3b-0693-4cd6-8429-949de721e47e
+   :END:
+
+ #+BEGIN_description 
+ Functional programming and category theory on the JVM.
+ #+END_description 
+
+ A JVM language with strong foundations in category theory. Used often for distributed data-intensive applications with frameworks like Akka, Storm, and Spark. 
+*** Apache Spark
+
+  #+BEGIN_description 
+  Distributed, fault-tolerant data processing for data pipelines and large-scale data science.
+  #+END_description 
+* Math
 * Statistics
 
 ** Chi-Squared Test
@@ -10,10 +75,6 @@ A chi-squared test tests a hypothesis by comparing an observed distribution to a
 * Data Science
   :PROPERTIES:
   :ID:       f97ea0b7-60f4-4fd3-9ebb-c5186e8000e1
-  :END:
-* Linear Algebra
-  :PROPERTIES:
-  :ID:       bcc4c5ef-673b-42a7-a188-a49a612c6dd5
   :END:
 ** Principal Component Analysis + KMeans
    :PROPERTIES:
