@@ -199,6 +199,21 @@ object Main {
 }
 #+END_SRC
 
+** pattern guard basics                                                :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-03-05 Mon]
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1520285126940
+   :END: 
+*** Front
+Pattern match x against an evaluation expression
+*** Back
+#+begin_src scala 
+x match {
+  case x if evaluate(x) => true
+  case _ => false
+}
+#+end_src
 * Spark                                                                :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:
