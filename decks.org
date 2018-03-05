@@ -214,6 +214,26 @@ x match {
   case _ => false
 }
 #+end_src
+** scala first iterator                                                :note:
+   :PROPERTIES: 
+   :CREATED:  <2018-03-05 Mon>
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :ANKI_NOTE_ID: 1520287206785
+   :END: 
+*** Front
+Get the first element of an iterator (e.g. to use as an example of what it produces)
+*** Back
+~iterator.first~
+** scala pairwise combinations                                         :note:
+   :PROPERTIES: 
+   :CREATED:  <2018-03-05 Mon>
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :ANKI_NOTE_ID: 1520287207065
+   :END: 
+*** Front
+Get the pairwise combinations of all the (unique) elements of a sequence ~seq~
+*** Back
+~seq.combinations(2)~
 * Spark                                                                :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:
@@ -514,6 +534,7 @@ Wrap "text" in slashes
    :CREATED:  <2018-03-03 Sat>
    :ANKI_NOTE_TYPE: Basic
    :SOURCE:   [[https://github.com/magit/magit/wiki/Cheatsheet][magit cheatsheet]]
+   :ANKI_NOTE_ID: 1520287207229
    :END: 
 *** Front
 Discard change at point in magit
@@ -561,11 +582,12 @@ In quil, set up a dynamic sketch in clojure from the REPL
    :PROPERTIES: 
    :CREATED:  <2018-03-03 Sat>
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1520287208068
    :END: 
 *** Front
 Specify a variable number of arguments in a function definition
 *** Back
-[& args]
+~[& args]~
 * Data Science                                                         :deck:
 ** k-means step                                                        :note:
    :PROPERTIES: 
