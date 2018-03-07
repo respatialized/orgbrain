@@ -234,6 +234,35 @@ Get the first element of an iterator (e.g. to use as an example of what it produ
 Get the pairwise combinations of all the (unique) elements of a sequence ~seq~
 *** Back
 ~seq.combinations(2)~
+** require syntax                                                      :note:
+   :PROPERTIES: 
+   :CREATED:  <2018-03-06 Tue>
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1520379519476
+   :END: 
+*** Front
+Require an argument to be within a specified range of values
+*** Back
+#+begin_src scala 
+def func(x: Int): Int = {
+  require(checkRange(x))
+  doSomething(x)
+}
+#+end_src
+** group a list                                                        :note:
+   :PROPERTIES: 
+   :CREATED:  <2018-03-06 Tue>
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :ANKI_NOTE_ID: 1520379519844
+   :END: 
+*** Front
+Get ~Map(1 -> Array(2,3), 2 -> Array(4))~ from ~Array((1,2),(1,3),(2,4))~
+*** Back
+#+begin_src scala 
+Array((1,2),(1,3),(2,4))
+  .groupBy(_._1)
+  .mapValues(_.map(_._2))
+#+end_src
 * Spark                                                                :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:

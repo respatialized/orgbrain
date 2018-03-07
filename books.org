@@ -1,4 +1,4 @@
-* How To Design Programs
+* How To Design Programs                                   :programming:lisp:
 ** Part 1: Fixed-Size Data
 
 What did I learn?
@@ -40,7 +40,7 @@ Taking the subway home last night while working on the introduction to recursion
 When I got off the subway, however, I realized that my naive implementation of the map function would probably run into issues that quotation (e.g. the distinction between use and mention of a lisp expression) would be necessary to solve. I don't think quotation is in the "Beginning Student" language that the early sections use. 
 
 Still, a pretty good indication that the text does an excellent job portraying recursion as a powerful idea. 
-* Functional Programming In Scala
+* Functional Programming In Scala                         :programming:scala:
 ** Chapter 1
 
 The chapter uses the example of a program to handle the buying of a cup of coffee to depict the notions of referential transparency and the substitution model in practice. A function is referentially transparent iff for all referentially transparent inputs it returns one and only one result. This property means that every expression in a pure function can be substituted for its result without changing the overall meaning of the function, facilitating the ability to locally reason about different parts of a function without worrying about how those parts interact with the rest of the function. These ideas seemed very intuitive after having completed HTDP intermezzo 1. 
@@ -78,7 +78,7 @@ O'Neil outlines the game that SITO is looking to get into: consumer risk modelin
 
 A cri de coeur for regulation in an industry that thrives on bullshit, opacity, and techno-utopianism.
 
-* The Stack
+* The Stack                                     :poltical-economy:technology:
   :PROPERTIES:
   :AUTHOR:   Benjamin Bratton
   :END:
