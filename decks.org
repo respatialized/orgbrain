@@ -636,3 +636,20 @@ centroid (which is a linear combination of the points' features)
 In a chi-squared test, what does the p-value measure the probability of?
 *** Back
 The difference between the observed and expected distribution happening by chance
+* Programming Methods                                                  :deck:
+** Stuck on functions                                                  :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Cloze
+   :ANKI_NOTE_ID: 1521039211841
+   :END:
+*** Text
+If you're stuck when writing a function, {{c1:: think of it in its mathematical sense}}: {{c2:: a continuous mapping from inputs to outputs}}, rather than {{c3:: a sequence of imperative instructions}}.
+*** Extra
+** Template types                                                      :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Cloze
+   :ANKI_NOTE_ID: 1521039211999
+   :END:
+*** Text
+When you can, keep templates for {{c1:: data types}} separate from templates for {{c2:: functions}}.
+*** Extra
