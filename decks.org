@@ -402,7 +402,19 @@ Send AWS S3 credentials with a s3 bucket path on databricks / spark
 *** Back
 
 s3a://ACCESS_KEY_ID:SECRET_ACCESS_KEY@full_bucket_name/path/to/file
+** deal with serialization errors                                      :note:
+   :PROPERTIES:
+   :ANKI_NOTE_TYPE: Basic
+   :END:
+*** Front
+How do you deal with a class or method that throws a serialization error?
+*** Back
+#+begin_src scala
+object Wrapper extends java.io.Serializable {
+// classes and methods go here
+}
 
+#+end_src
 * Emacs                                                                :deck: 
 ** remove agenda filter                                                :note:
    :PROPERTIES:
