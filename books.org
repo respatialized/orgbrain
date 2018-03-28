@@ -87,3 +87,48 @@ Address layer
 Universal addressability all but guarantees that multiple independent users and networks will have their own addressing schemas, intertwined but also incompatible with many others. Direct object to object communication without human oversight might surprise us with unexpected ecologies of objects communicating and exchanging resources in wholly novel ways.
 
 
+* Essential Scala :programming:scala:
+
+** Chapter 2
+2.2.5.1 Operator style
+#+begin_src scala 
+"foo".take(1) == "foo" take 1
+1 + 2 + 3 == 1.+(2).+(3)
+#+end_src
+2.2.5.2 Substitution
+#+begin_src scala 
+1 + 2 + 3 == 6
+
+#+end_src
+2.3 
+The literal types in scala are:
+1. Numbers:
+   1. Int - 32bit integer
+   2. Double - 64bit floating point
+   3. Float - 32bit floating point
+   4. Long - 64bit integer
+2. Booleans:
+   1. true
+   2. false
+3. Characters - 16bit unicode values in quotes
+4. Strings
+5. Null (considered harmful)
+6. Unit ()
+
+2.3.8.1 Literally Just Literals
+42 - value: 42, type: Int
+true - value: true, type: Boolean
+123L - value: 123, type: Long
+42.0 - value: 42.0, type: Double
+
+2.3.8.2 Quotes and Misquotes
+'a' vs "a"
+
+The former is a Char, the latter is a String.
+
+2.3.8.3  An Aside on Side-Effects
+~"Hello world!"~ is a string literal with a value of ~"Hello world!"~,
+~println("Hello world!")~ is an expression with a value of Unit.
+2.3.8.4 Learning by Mistakes
+~'Hello world!'~ triggers an error because it encloses more than a single character in single quotes.
+2.4 Object literals

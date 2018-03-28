@@ -405,6 +405,73 @@ Can you treat values of Some() the same as their contained values?
 
 No.
 
+** type erasure                                                        :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-03-28 Wed]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 2
+   :END: 
+*** Front
+After a program compiles, what happens to the type information?
+*** Back
+It is no longer needed, so it is removed.
+** object data                                                         :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-03-28 Wed]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 2
+   :END: 
+*** Front
+Where does an object keep its data?
+*** Back
+In fields.
+** infix operators                                                     :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-03-28 Wed]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: Essential Scala, chapter 2
+   :END: 
+*** Front
+a.b(c) =
+*** Back
+a b c =
+** literals and values                                                 :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-03-28 Wed]
+   :ANKI_NOTE_TYPE: Cloze
+   :SOURCE: Essential scala, chapter 2
+   :END: 
+*** Text
+The {{c1::literal expression}} is the {{c2::representation in the program text}}, before the program is run, and the {{c3::value}} is the {{c4::representation in the computer’s memory}} after the program has run.
+*** Extra
+** alternative to null                                                 :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-03-28 Wed]
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+What should you use in lieu of null in scala?
+*** Back
+None
+** why not use null?                                                   :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-03-28 Wed]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 2
+   :END: 
+*** Front
+Why is it bad to use nulls in Scala?
+*** Back
+They can't be checked by the compiler, which hobbles the type system.
+** object declaration                                                  :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-03-28 Wed]
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+Is ~object Test {}~ an expression?
+*** Back
+No, it has no value - not even ~Unit~
 * Spark                                                                :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:
