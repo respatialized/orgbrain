@@ -410,6 +410,7 @@ No.
    :CREATED:  [2018-03-28 Wed]
    :ANKI_NOTE_TYPE: Basic
    :SOURCE: Essential Scala, chapter 2
+   :ANKI_NOTE_ID: 1522263832729
    :END: 
 *** Front
 After a program compiles, what happens to the type information?
@@ -420,6 +421,7 @@ It is no longer needed, so it is removed.
    :CREATED:  [2018-03-28 Wed]
    :ANKI_NOTE_TYPE: Basic
    :SOURCE: Essential Scala, chapter 2
+   :ANKI_NOTE_ID: 1522263832980
    :END: 
 *** Front
 Where does an object keep its data?
@@ -430,6 +432,7 @@ In fields.
    :CREATED:  [2018-03-28 Wed]
    :ANKI_NOTE_TYPE: Basic (and reversed card)
    :SOURCE: Essential Scala, chapter 2
+   :ANKI_NOTE_ID: 1522263833126
    :END: 
 *** Front
 a.b(c) =
@@ -440,6 +443,7 @@ a b c =
    :CREATED:  [2018-03-28 Wed]
    :ANKI_NOTE_TYPE: Cloze
    :SOURCE: Essential scala, chapter 2
+   :ANKI_NOTE_ID: 1522263833321
    :END: 
 *** Text
 The {{c1::literal expression}} is the {{c2::representation in the program text}}, before the program is run, and the {{c3::value}} is the {{c4::representation in the computer’s memory}} after the program has run.
@@ -448,6 +452,7 @@ The {{c1::literal expression}} is the {{c2::representation in the program text}}
    :PROPERTIES: 
    :CREATED:  [2018-03-28 Wed]
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1522263833553
    :END: 
 *** Front
 What should you use in lieu of null in scala?
@@ -458,6 +463,7 @@ None
    :CREATED:  [2018-03-28 Wed]
    :ANKI_NOTE_TYPE: Basic
    :SOURCE: Essential Scala, chapter 2
+   :ANKI_NOTE_ID: 1522263833689
    :END: 
 *** Front
 Why is it bad to use nulls in Scala?
@@ -467,6 +473,7 @@ They can't be checked by the compiler, which hobbles the type system.
    :PROPERTIES: 
    :CREATED:  [2018-03-28 Wed]
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1522263833820
    :END: 
 *** Front
 Is ~object Test {}~ an expression?
