@@ -479,6 +479,17 @@ They can't be checked by the compiler, which hobbles the type system.
 Is ~object Test {}~ an expression?
 *** Back
 No, it has no value - not even ~Unit~
+** package compilation                                                 :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-02 Mon]
+   :ANKI_NOTE_TYPE: Basic
+  :SOURCE: trial and error with SBT
+  :ANKI_NOTE_ID: 1522710430815
+   :END: 
+*** Front
+Why won't my class import from the package I defined?
+*** Back
+Because you haven't recompiled the project recently.
 * Spark                                                                :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:
@@ -647,6 +658,17 @@ If you're unit testing in spark,
 
 You'd better make sure you're writing examples that operate on rows and DFs too.
 
+** style: DFs                                                          :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-02 Mon]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: [[https://github.com/MrPowers/spark-style-guide][Matthew Powers' Spark Style Guide]]
+   :ANKI_NOTE_ID: 1522710433062
+   :END: 
+*** Front
+The format for variables pointing to DFs
+*** Back
+~deviceDF.createOrReplaceTempView("device")~
 * Emacs                                                                :deck: 
 ** remove agenda filter                                                :note:
    :PROPERTIES:
