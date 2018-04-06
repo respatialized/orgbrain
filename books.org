@@ -132,3 +132,56 @@ The former is a Char, the latter is a String.
 2.3.8.4 Learning by Mistakes
 ~'Hello world!'~ triggers an error because it encloses more than a single character in single quotes.
 2.4 Object literals
+
+2.4.5.1 Cats!
+
+#+begin_src scala
+
+object Oswald {
+  val color = "Black"
+  val food = "Milk"
+}
+
+object Henderson {
+  val color = "Ginger"
+  val food = "Chips"
+}
+
+object Quentin {
+  val color = "Tabby and white"
+  val food = "Curry"
+}
+
+#+end_src
+
+2.4.5.2 Square Dance!
+
+#+begin_src scala
+
+object calc {
+  def square(i: Double): Double = {
+    i * i
+  }
+
+  def cube(i: Double): Double = {
+    square(i) * i
+  }
+}
+
+#+end_src
+
+2.5.4.3 Precise Square Dance
+
+#+begin_src scala
+
+object calc2 {
+  def square(i: Double): Double = {
+    i * i
+  }
+
+  def cube(i: Double): Double = {
+    square(i) * i
+  }
+}
+
+#+end_src

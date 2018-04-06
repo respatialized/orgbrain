@@ -490,6 +490,41 @@ No, it has no value - not even ~Unit~
 Why won't my class import from the package I defined?
 *** Back
 Because you haven't recompiled the project recently.
+** apply a list of methods to an expression                            :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-03 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: [[https://stackoverflow.com/questions/8550356/array-of-functions][Stack Overflow]]
+   :ANKI_NOTE_ID: 1523048584600
+   :END: 
+*** Front
+Apply multiple functions to an expression via an array
+*** Back
+#+begin_src scala
+Array(addOne _, addTwo _).map(_(1))
+#+end_src
+** return types                                                        :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-06 Fri]
+   :ANKI_NOTE_TYPE: Basic
+  :SOURCE: Essential Scala, chapter 2
+  :ANKI_NOTE_ID: 1523048584779
+   :END: 
+*** Front
+Do you have to specify the return type of a method?
+*** Back
+No, but it's strongly encouraged!
+** overloading float and int                                           :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-06 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 2
+   :ANKI_NOTE_ID: 1523048584955
+   :END: 
+*** Front
+What's the best way to write a method that handles both floats and ints?
+*** Back
+Method overloading is the best way, because floats and ints are primitive types.
 * Spark                                                                :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:
@@ -669,6 +704,24 @@ You'd better make sure you're writing examples that operate on rows and DFs too.
 The format for variables pointing to DFs
 *** Back
 ~deviceDF.createOrReplaceTempView("device")~
+** get test DF from SBT resources                                      :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-03 Tue]
+   :ANKI_NOTE_TYPE: Cloze
+   :ANKI_NOTE_ID: 1523048587334
+   :END: 
+*** Text
+To get Spark sample data from a SBT project, use
+#+begin_src scala
+val testDF = {{c1::sparkContext.parallelize}}(
+  {{c1::Source.fromUrl}}(
+  {{c3::getClass}}.{{c4::getClassLoader}}.{{c5::getResource}}("test.csv")
+  ).{{c6::mkString}}.{{c7::split("\n")}}
+).toDF
+
+#+end_src
+*** Extra
+
 * Emacs                                                                :deck: 
 ** remove agenda filter                                                :note:
    :PROPERTIES:
