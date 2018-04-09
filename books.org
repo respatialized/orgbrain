@@ -78,7 +78,7 @@ O'Neil outlines the game that SITO is looking to get into: consumer risk modelin
 
 A cri de coeur for regulation in an industry that thrives on bullshit, opacity, and techno-utopianism.
 
-* The Stack                                     :poltical-economy:technology:
+* The Stack                                     :political-economy:technology:
   :PROPERTIES:
   :AUTHOR:   Benjamin Bratton
   :END:
@@ -185,3 +185,41 @@ object calc2 {
 }
 
 #+end_src
+
+2.5.4.4 Order of evaluation
+
+The final expression's value output is "3c31" and in the process of evaluating each sub-expression, it prints "b", then "a", then "c", then "a"  to the console.
+
+2.4.5.5 Greetings, human
+
+#+begin_src scala
+
+object human {
+  val firstName = "Homer"
+  val lastName = "Simpson"
+}
+
+object alien {
+  def greet(h: human.type): String = {
+    "Greetings, " + h.firstName + "."
+  }
+}
+
+#+end_src
+
+Above, we can see how to define methods that operate on the values of singleton objects.
+
+2.4.5.6 The value of methods
+
+Methods are not values (functions are), nor are they expressions. This is because they cannot evaluate to a value without being called. Once they are called, methods are equivalent to expressions.
+
+2.5 Writing methods
+
+A design recipe for scala methods!
+
+1. Identify the input and output types of the method.
+2. Prepare test cases
+3. Write the template of the method declaration using ???
+4. Test the code and observe the failures
+5. Work forwards from the input, or backwards from the output to build the body of the method
+6. Run the code again and observe the tests pass

@@ -525,6 +525,39 @@ No, but it's strongly encouraged!
 What's the best way to write a method that handles both floats and ints?
 *** Back
 Method overloading is the best way, because floats and ints are primitive types.
+** singleton method                                                    :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-09 Mon]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 2
+   :ANKI_NOTE_ID: 1523306948403
+   :END: 
+*** Front
+How would you write a method for another object or class to operate on a singleton object?
+*** Back
+#+begin_src scala
+def getValue(s: singleton.type): Any = {
+  s.value
+}
+#+end_src
+** scala design recipe                                                 :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-09 Mon]
+   :ANKI_NOTE_TYPE: Cloze
+   :SOURCE: Essential Scala, chapter 2
+   :ANKI_NOTE_ID: 1523306948555
+   :END: 
+*** Text
+To write a method in scala, 
+
+1.  Identify {{c1::inputs and outputs}}
+2. Prepare {{c2::test cases}}
+3. Write {{c3:: the method template using ???}}
+4. {{c4:: test the code and observe the failures}}
+5. {{c5:: work forwards from input, and backwards from output to build the body}}
+6. {{c6:: run the code again and observe the passes}}
+*** Extra
+
 * Spark                                                                :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:
