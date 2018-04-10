@@ -558,6 +558,183 @@ To write a method in scala,
 6. {{c6:: run the code again and observe the passes}}
 *** Extra
 
+** conditional expression branches                                     :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-10 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 2
+   :ANKI_NOTE_ID: 1523378877988
+   :END: 
+*** Front
+Does the unchosen branch of a conditional expression get evaluated to a value?
+*** Back
+No.
+** Where does ~Any~ show up?                                           :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-10 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 2
+   :ANKI_NOTE_ID: 1523378878233
+   :END: 
+*** Front
+What's the type of an unevalutated expression that evaluates to more than one type?
+*** Back
+~Any~
+** type of ~Unit~                                                      :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-10 Tue]
+   :ANKI_NOTE_TYPE: Basic
+  :SOURCE: Essential Scala, chapter 2
+  :ANKI_NOTE_ID: 1523378878395
+   :END: 
+*** Front
+What's the type of the value ~Unit~?
+*** Back
+~Any~
+** names of objects                                                    :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-10 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 3
+   :ANKI_NOTE_ID: 1523378878575
+   :END: 
+*** Front
+What does an object declaration do instead of evaluating an expression?
+*** Back
+It binds a name.
+** Scala interop 101                                                   :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-10 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 3
+   :ANKI_NOTE_ID: 1523378878802
+   :END: 
+*** Front
+What are all Scala classes subclasses of?
+*** Back
+~java.lang.Object~
+** define class fields instantly!                                      :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-10 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 3
+   :ANKI_NOTE_ID: 1523378879979
+   :END: 
+*** Front
+How would you easily assign a class constructor's values to fields?
+*** Back
+#+begin_src scala
+class Person(val first: String, val last: String) {
+  def name = first + " " + last
+}
+#+end_src
+** Text
+#+begin_src scala
+
+class {{c1::Name}}({{c2::val}} {{c3::parameter}}: {{c4::type}}, ...) {
+  {{c5::declarationOrExpression}} ...
+}
+
+#+end_src
+** keyword params                                                      :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-10 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 3
+   :ANKI_NOTE_ID: 1523378880188
+   :END: 
+*** Front
+Why are keyword parameters useful?
+*** Back
+"Keyword parameters are robust to changes in the number and order of parameters."
+** ~Any~'s subtypes                                                    :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-10 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 3
+   :ANKI_NOTE_ID: 1523378880316
+   :END: 
+*** Front
+What are the two subtypes of ~Any~?
+*** Back
+~AnyVal~ and ~AnyRef~
+** ~AnyVal~ basics                                                     :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-10 Tue]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: Essential Scala, chapter 3
+   :ANKI_NOTE_ID: 1523378880442
+   :END: 
+*** Front
+The type that all values are subtypes of
+*** Back
+~AnyVal~
+** ~AnyRef~ basics                                                     :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-10 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 3
+   :ANKI_NOTE_ID: 1523378880645
+   :END: 
+*** Front
+The type that all objects are subtypes of
+*** Back
+~AnyRef~ = ~java.lang.Object~
+** the bottom of scala's type heap                                     :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-10 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 3
+   :ANKI_NOTE_ID: 1523378880771
+   :END: 
+*** Front
+What types are /subtypes/ of every other type?
+*** Back
+~Nothing~ and ~Null~
+** ~Nothing~ basics                                                    :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-10 Tue]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: Essential Scala, chapter 3
+   :ANKI_NOTE_ID: 1523378880971
+   :END: 
+*** Front
+The type of throw expressions
+*** Back
+~Nothing~
+** ~Null~ basics                                                       :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-10 Tue]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: Essential Scala, chapter 3
+   :ANKI_NOTE_ID: 1523378881099
+   :END: 
+*** Front
+The type of the value ~null~
+*** Back
+~Null~
+** why give ~null~ a type?                                             :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-10 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chaper 3
+   :ANKI_NOTE_ID: 1523378881230
+   :END: 
+*** Front
+Why does ~null~ have a type?
+*** Back
+So we can reason about ~nulls~ in Scala's type system.
+** Why give throws a type?                                             :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-10 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 3
+   :ANKI_NOTE_ID: 1523378881434
+   :END: 
+*** Front
+Why do throw expressions have a type in Scala?
+*** Back
+So that we can reason about exceptions in Scala's type system.
 * Spark                                                                :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:
@@ -755,6 +932,19 @@ val testDF = {{c1::sparkContext.parallelize}}(
 #+end_src
 *** Extra
 
+** avoid aggregation bottleneck                                        :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-10 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: [[https://stackoverflow.com/questions/45704156/what-is-the-difference-between-spark-sql-shuffle-partitions-and-spark-default-pa][Stack Overflow]]
+   :ANKI_NOTE_ID: 1523378883961
+   :END: 
+*** Front
+How would you avoid a memory bottleneck when performing an aggregation?
+*** Back
+#+begin_src scala
+sqlContext.setConf("spark.sql.shuffle.partitions", x)
+#+end_src
 * Emacs                                                                :deck: 
 ** remove agenda filter                                                :note:
    :PROPERTIES:

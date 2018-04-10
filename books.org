@@ -223,3 +223,97 @@ A design recipe for scala methods!
 4. Test the code and observe the failures
 5. Work forwards from the input, or backwards from the output to build the body of the method
 6. Run the code again and observe the tests pass
+
+2.6 Conditionals and Blocks
+
+Blocks always inherit the type of the final expression within them.
+
+2.6.4.1 A classic rivalry
+
+The type is ~String~, the value is ~"predator"~.
+
+2.6.4.2 A less well known rivalry
+
+The type is ~Any~, the value is 2001.
+
+2.6.4.3 An if without an else
+
+The return type is ~Any~ and the value is ~Unit~ (or ~()~ )
+
+** Chapter 3
+
+*** 3.1 Classes
+#+begin_src scala
+
+class Person {
+  val firstName = "Noel"
+  val lastName = "Welsh"
+  def name = firstName + " " + lastName
+}
+
+val noel = new Person
+
+object alien {
+  def greet(p: Person) =
+    "Greetings, " + p.firstName + " " + p.lastName
+}
+
+
+#+end_src
+
+There's no point in making classes with (only) static fields!
+
+3.1.2 Constructors
+
+#+begin_src scala
+
+class Person(first: String, last: String) {
+  val firstName = first
+  val lastName = last
+  def name = firstName + " " + lastName
+}
+
+#+end_src
+
+3.1.3 Default and Keyword Parameters
+
+#+begin_src scala
+def greet(firstName: String = "Some", lastName: String = "Body") =
+  "Greetings, " + firstName + " " + lastName + "!"
+#+end_src
+
+3.1.6.2 Cats on the prowl
+
+#+begin_src scala
+
+class Cat(val name: String, val color: String, val food: String) {
+  def describe = name + " is a " + color + " cat who loves " + food + "."
+}
+
+val meowz = new Cat("Meowzer", "Black", "steak")
+val oswald = new Cat("Oswald", "Black", "milk")
+val henderson = new Cat("Henderson", "Ginger", "chips")
+val quentin = new Cat("Quentin", "Tabby and white", "curry")
+
+
+#+end_src
+
+3.1.6.2 Cats on the prowl
+
+#+begin_src scala
+
+object ChipShop {
+  def willServe(cat: Cat): Boolean = {
+    if (cat.food == "chips") true else false
+  }
+}
+
+#+end_src
+
+3.1.6.3 Directorial Debut
+
+#+begin_src scala
+
+class Director(val firstName: String, val lastName: String, val yearOfBirth: Int
+
+#+end_src
