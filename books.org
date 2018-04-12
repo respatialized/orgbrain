@@ -88,7 +88,10 @@ Universal addressability all but guarantees that multiple independent users and 
 
 
 * Essential Scala :programming:scala:
+Typelevel's free ebook on Scala fundamentals for experienced programmers. 
 
+** Chapter 1
+I skipped this because I'm already up and running with [[http://ensime.github.io/][ENSIME]].
 ** Chapter 2
 2.2.5.1 Operator style
 #+begin_src scala 
@@ -314,6 +317,82 @@ object ChipShop {
 
 #+begin_src scala
 
-class Director(val firstName: String, val lastName: String, val yearOfBirth: Int
+class Director(val firstName: String, 
+               val lastName: String, 
+               val yearOfBirth: Int) {
+  def name = firstName + " " + lastName
+}
+
+class Film(val name: String,
+           val yearOfRelease: Int,
+           val imdbRating: Double,
+           val director: Director) {
+  def directorsAge = yearOfRelease - director.yearOfBirth
+  def isDirectedBy(d: Director): Boolean = {
+  d == director
+  }
+
+  def copy(name: String = name,
+           yearOfRelease: Int = yearOfRelease,
+           imdbRating: Double = imdbRating,
+           director: Director = director) = {
+  new Film(name, yearOfRelease, imdbRating, director)
+  }
+}
+
+#+end_src
+
+3.1.6.4 A simple counter
+
+#+begin_src scala
+
+class Counter(val i: Int) {
+  def inc(): Counter = {
+    new Counter(i + 1)
+  }
+
+  def dec(): Counter = {
+    new Counter(i - 1)
+  }
+}
+
+val c1 = new Counter(1)
+val c2 = new Counter(-1)
+
+assert(c1.inc.i == 2)
+assert(c2.dec.i == -2)
+
+
+#+end_src
+
+3.1.6.5 Counting Faster
+
+#+begin_src scala
+
+class Counter(val i: Int) {
+  def inc(amt: Int = 1): Counter = {
+    new Counter(i + amt)
+  }
+
+  def dec(amt: Int = 1): Counter = {
+    new Counter(i - amt)
+  }
+}
+
+val c1 = new Counter(1)
+val c2 = new Counter(-1)
+
+assert(c1.inc().i == 2)
+assert(c2.dec().i == -2)
+
+assert(c2.dec(3).i == -4)
+assert(c1.inc(3).i == 4)
+
+#+end_src
+
+3.1.6.6 Additional counting
+
+#+begin_src scala
+
 
 #+end_src

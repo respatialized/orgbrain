@@ -945,6 +945,20 @@ How would you avoid a memory bottleneck when performing an aggregation?
 #+begin_src scala
 sqlContext.setConf("spark.sql.shuffle.partitions", x)
 #+end_src
+** udf for row                                                         :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-11 Wed]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: [[https://stackoverflow.com/questions/42931796/spark-udf-for-structtype-row][Stack Overflow]]
+   :END: 
+*** Front
+Write a UDF that operates on a Row type
+*** Back
+#+begin_src scala
+
+val u = udf((x: Row) => x, rowSchema)
+
+#+end_src
 * Emacs                                                                :deck: 
 ** remove agenda filter                                                :note:
    :PROPERTIES:
