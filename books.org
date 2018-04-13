@@ -394,5 +394,55 @@ assert(c1.inc(3).i == 4)
 
 #+begin_src scala
 
+class Adder(val amount: Int) {
+   def add(in: Int) = in + amount
+}
+
+class Counter(val i: Int) {
+  def inc(amt: Int = 1): Counter = {
+    new Counter(i + amt)
+  }
+
+  def dec(amt: Int = 1): Counter = {
+    new Counter(i - amt)
+  }
+  
+  def adjust(a: Adder, in: Int): Counter = {
+    new Counter(i + a.add(in))
+  }
+}
+
 
 #+end_src
+
+* Spark: The Definitive Guide
+
+** Shuffling
+#+begin_quote
+"The slower repartition method will also shuffle data across the network to achieve even load balancing." (ch. 19)
+#+end_quote
+Does this mean that if you call ~repartition(n)~ on a DF (where n is the number of existing partitions), then you automatically avoid some data skew?
+
+#+BEGIN_QUOTE
+"Another frequent source of performance enhancements is moving filters to the earliest part of your Spark job that you can. Sometimes, these filters can be pushed into the data sources themselves and this means that you can avoid reading and working with data that is irrelevant to your end result. Enabling partitioning and bucketing also helps achieve this." (ch. 19)
+#+END_QUOTE
+
+If we're reading in a large dataset and then filtering by one of its partitions, do we need to call ~coalesce~ on it to ensure that there's less of a shuffle overhead?  No. Filtering by the partition ensures a smaller number of partitions by default
+
+Will calling ~repartition~ with a lower number of partitions simultaneously achieve the load balancing and reduced partitioning steps? Will this make a difference once it gets to the partitioning step?
+
+#+begin_quote
+"In general, we recommend having at least two or three tasks per CPU core in your cluster if the stage processes a large amount of data." (ch. 19)
+#+end_quote 
+
+
+
+#+begin_quote
+"If a full garbage collection is invoked multiple times before a task completes, it means that there isn’t enough memory available for executing tasks, so you should decrease the amount of memory Spark uses for caching (spark.memory.fraction)." (ch. 19)
+#+end_quote
+
+#+begin_quote
+"Note that with large executor heap sizes, it can be important to increase the G1 region size with -XX:G1HeapRegionSize." (ch. 19)
+#+end_quote
+
+For uncommon use cases like ~collect_list~ on a large dataset, then this might be a necessary step - removing large result rows of collected data probably invokes the GC pretty frequently. 

@@ -7,9 +7,6 @@ A good way to think about using org-mode is: "is it a task, a fact, a note, or a
 + notes.org
 A scattershot file containing lots of notes that used to live in way too many places. An archive of notes undertaken on projects, collected on the subway, while reading, wherever! Disorganization encourages creativity (in this file), so everything is flat.
 
-+ Books (folder)
-A folder with the "deliberate practice" books. Those that I need to read with emacs (and a repl) open alongside.
-
 + books.org
 The file containing the notes on the books in the "deliberate practice" books. Needed as a separate file because org-noter requires the books to be a top-level headline.
 
