@@ -735,6 +735,31 @@ So we can reason about ~nulls~ in Scala's type system.
 Why do throw expressions have a type in Scala?
 *** Back
 So that we can reason about exceptions in Scala's type system.
+** transpose lists                                                     :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-16 Mon]
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1524091060207
+   :END: 
+*** Front
+get the index/element-wise matches from an arbitrary number of lists
+*** Back
+#+BEGIN_SRC scala
+list(l1, l2, ln).transpose
+#+END_SRC
+** compile test sources without running                                :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-18 Wed]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: [[https://stackoverflow.com/questions/13847109/how-to-compile-tests-with-sbt-without-running-them][Stack Overflow]]
+   :ANKI_NOTE_ID: 1524091060352
+   :END: 
+*** Front
+In SBT, how would you compile the source code of the unit tests without running them?
+*** Back
+#+BEGIN_SRC shell
+sbt compile:test
+#+END_SRC
 * Spark                                                                :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:
@@ -950,6 +975,7 @@ sqlContext.setConf("spark.sql.shuffle.partitions", x)
    :CREATED:  [2018-04-11 Wed]
    :ANKI_NOTE_TYPE: Basic
    :SOURCE: [[https://stackoverflow.com/questions/42931796/spark-udf-for-structtype-row][Stack Overflow]]
+   :ANKI_NOTE_ID: 1524091062730
    :END: 
 *** Front
 Write a UDF that operates on a Row type
@@ -959,6 +985,16 @@ Write a UDF that operates on a Row type
 val u = udf((x: Row) => x, rowSchema)
 
 #+end_src
+** spark sql views considered harmful                                  :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-18 Wed]
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1524090986095
+   :END: 
+*** Front
+Why is it better to avoid the use of sql strings in large Spark programs?
+*** Back
+Because the compiler can't check the results of the queries embedded in those strings.
 * Emacs                                                                :deck: 
 ** remove agenda filter                                                :note:
    :PROPERTIES:
