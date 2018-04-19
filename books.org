@@ -407,13 +407,49 @@ class Counter(val i: Int) {
     new Counter(i - amt)
   }
   
-  def adjust(a: Adder, in: Int): Counter = {
-    new Counter(i + a.add(in))
+  def adjust(a: Adder): Counter = {
+    new Counter(a.add(i))
   }
 }
 
 
 #+end_src
+
+*** 3.2 Objects as Functions
+
+#+BEGIN_SRC scala
+
+class Adder(val amount: Int) {
+  def apply(in: Int): Int = in + amount
+}
+#+END_SRC
+
+3.2.3 When is a Function not a Function?
+
+"How close does function application syntax get us to creating truly reusable objects to do computations for us? What
+are we missing?"
+
+My answer: As far as I can tell, we don't yet have the other building blocks of abstraction: ways to apply a function to a collection, partial application, or ways of writing a function that yields another function as its output.
+
+The book's answer: we don't yet have types, which is how you decompose class functionality into simple reusable units.
+
+*** 3.3 Companion Objects
+#+BEGIN_SRC scala
+class Timestamp(val seconds: Long) {
+ 
+}
+
+object Timestamp {
+   def apply(hours: Int, minutes: Int, seconds: Int): Timestamp =
+    new Timestamp(hours*60*60 + minutes*60 + seconds)
+}
+#+END_SRC
+My take on why companion objects are useful: because they separate runtime /data/ from compile-time /methods/.
+
+
+**** 3.3.2.1 Friendly Person Factory
+
+**** 3.3.2.2 Extended body of Work
 
 * Spark: The Definitive Guide
 

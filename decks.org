@@ -760,6 +760,66 @@ In SBT, how would you compile the source code of the unit tests without running 
 #+BEGIN_SRC shell
 sbt compile:test
 #+END_SRC
+** call an object like a function                                      :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-19 Thu]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 3
+   :ANKI_NOTE_ID: 1524173272808
+   :END: 
+*** Front
+How do you call an object like a function?
+*** Back
+#+BEGIN_SRC scala
+object myObj{
+  def apply(input: Any): Any = doSomething(input)
+}
+#+END_SRC
+** method arg                                                          :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-19 Thu]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 3
+   :ANKI_NOTE_ID: 1524173272972
+   :END: 
+*** Front
+Can you pass a method as an argument?
+*** Back
+No.
+** methods vs functions, pt 1                                          :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-19 Thu]
+   :ANKI_NOTE_TYPE: Basic
+  :SOURCE: Essential Scala, chapter 3
+  :ANKI_NOTE_ID: 1524173273126
+   :END: 
+*** Front
+Why is it good that functions are objects in Scala?
+*** Back
+"Unlike methods, objects can be passed around as data."
+
+** companion objects                                                   :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-19 Thu]
+   :ANKI_NOTE_TYPE: Basic
+  :SOURCE: Essential Scala, chapter 3
+  :ANKI_NOTE_ID: 1524173273262
+   :END: 
+*** Front
+If you wanted to add functionality to an entire class rather than a specific instance, you would use:
+*** Back
+A companion object.
+** companion objects #2                                                :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-19 Thu]
+   :ANKI_NOTE_TYPE: Basic
+  :SOURCE: Essential Scala, chapter 3, [[http://fruzenshtein.com/scala-case-class-companion-object/][Fruzenshtein Notes]], & [[https://softwareengineering.stackexchange.com/questions/179390/what-are-the-advantages-of-scalas-companion-objects-vs-static-methods][Stack Overflow]]
+  :ANKI_NOTE_ID: 1524173273465
+   :END: 
+*** Front
+What's the primary advantage of companion objects?
+*** Back
+They enforce a clear separation between run-time data and compile-time methods.
 * Spark                                                                :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:
