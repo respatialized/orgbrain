@@ -446,10 +446,82 @@ object Timestamp {
 #+END_SRC
 My take on why companion objects are useful: because they separate runtime /data/ from compile-time /methods/.
 
+Here's one example of why this might be useful that I thought of this morning: say you have a ~Timer~ class, which has a default ~length~ field of 20m that can be overridden at run-time to produce ~Timer~ objects with different countdown times. If you wanted to extend into a ~Pomodoro~ class with a ~waitTime~ field and corresponding method that waited before launching another timer, you could create the class by extending ~Timer~, thus automatically inheriting the default value of 20m.
 
 **** 3.3.2.1 Friendly Person Factory
+#+BEGIN_SRC scala
 
+object Person {
+  def apply(wholeName: String): Person = {
+    val sp = wholeName.split(" ")
+    new Person(sp(0), sp(1))
+  }
+}
+
+class Person(val firstName: String, val lastName: String) {
+  def name = firstName + " " + lastName
+}
+
+#+END_SRC
 **** 3.3.2.2 Extended body of Work
+#+BEGIN_SRC scala
+
+class Director(val firstName: String, 
+               val lastName: String, 
+               val yearOfBirth: Int) {
+  def name = firstName + " " + lastName
+}
+
+class Film(val name: String,
+           val yearOfRelease: Int,
+           val imdbRating: Double,
+           val director: Director) {
+  def directorsAge = yearOfRelease - director.yearOfBirth
+  def isDirectedBy(d: Director): Boolean = {
+  d == director
+  }
+
+object Director {
+  def apply(firstName: String, lastName: String, yearOfBirth: Int): Director = {
+    new Director(firstName, lastName, yearOfBirth)
+  }
+
+  def older(d1: Director, d2: Director): Director = {
+    if (d1.yearOfBirth <= d2.yearOfBirth) d1 else d2
+  }
+}
+
+object Film {
+  def apply(val name: String,
+            val yearOfRelease: Int,
+            val imdbRating: Double,
+            val director: Director): Film = {
+    new Film(name, yearOfRelease, imdbRating, director)
+  }
+
+  def highestRating(f1: Film, f2: Film): Film = {
+    if (f1.imdbRating >= f2.imdbRating) f1 else f2
+  }
+
+  def oldestDirectorAtTheTime(f1: Film, f2: Film): Film = {
+    if (f1.directorsAge >= f2.directorsAge) f1 else f2
+  }
+}
+
+#+END_SRC
+**** 3.3.2.3 Type or value?
+
+1. value   actual answer: type
+2. value   actual answer: type
+3. type    actual answer: value   
+4. value   actual answer: value
+5. my answer: type  actual answer: value
+
+Things to keep in mind: every method defined on the companion object is a value, constructors are a part of the class (and therefore types), look at what is defined in the companion object vs what's defined in the class.
+*** 3.4 Case classes
+They take the boilerplate out of defining a class with sensible defaults. When you define a case class, you get a companion object for free, as well as a few convenience methods - the most important of which is the extractor pattern, which will come in handy for pattern matching later on.
+
+You can also define a ~case object~ , which the same default methods as a case class for a singleton.
 
 * Spark: The Definitive Guide
 
