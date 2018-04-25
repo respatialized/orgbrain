@@ -1055,6 +1055,20 @@ val u = udf((x: Row) => x, rowSchema)
 Why is it better to avoid the use of sql strings in large Spark programs?
 *** Back
 Because the compiler can't check the results of the queries embedded in those strings.
+** create a dataframe from scratch                                     :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-25 Wed]
+   :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1524694460403
+   :END: 
+*** Front
+Create a dataframe with a string column ss, a Double column v, and an Int column ix
+*** Back
+#+BEGIN_SRC scala
+val rowData = ("s01", 4.5, 0)
+val dataDF = sc.parallelize(Seq(rowData)).toDF("ss", "v", "ix")
+
+#+END_SRC
 * Emacs                                                                :deck: 
 ** remove agenda filter                                                :note:
    :PROPERTIES:
