@@ -523,6 +523,15 @@ They take the boilerplate out of defining a class with sensible defaults. When y
 
 You can also define a ~case object~ , which the same default methods as a case class for a singleton.
 
+Case classes reduce the barrier to entry for defining your own types, which in turn gets you into the habit of adding type-safety to your program. In this sense they are an /affordance/ to Scala's more powerful features.
+**** 3.4.5.1 Case Cats
+#+BEGIN_SRC scala
+
+case class Cat(color: String, food: String)
+
+#+END_SRC
+**** 3.4.5
+
 * Spark: The Definitive Guide
 
 ** Shuffling
