@@ -820,6 +820,16 @@ A companion object.
 What's the primary advantage of companion objects?
 *** Back
 They enforce a clear separation between run-time data and compile-time methods.
+** add item to list                                                    :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Trial and error
+   :END: 
+*** Front
+Return a new list ~l~ with element ~i~ added
+*** Back
+~l :+ i~
 * Spark                                                                :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:
