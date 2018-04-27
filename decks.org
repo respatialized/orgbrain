@@ -1069,6 +1069,338 @@ val rowData = ("s01", 4.5, 0)
 val dataDF = sc.parallelize(Seq(rowData)).toDF("ss", "v", "ix")
 
 #+END_SRC
+**  db command mode switch                                             :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851837717
+   :END: 
+*** Front
+Switch to command mode in Databricks
+*** Back
+~<ESC>~
+** databricks find/replace                                             :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks Self-Documentation
+   :ANKI_NOTE_ID: 1524851837940
+   :END: 
+*** Front
+In Databricks edit mode, perform a find/replace
+*** Back
+~<Ctrl> <Alt> <F>~
+** databricks run + insert                                             :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851838094
+   :END: 
+*** Front
+In Databricks, execute a command and insert a new cell
+*** Back
+~<Alt> + <Enter>~
+** db vanilla run command                                              :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851838245
+   :END: 
+*** Front
+Run a command in databricks and remain at the same cell
+*** Back
+~<Ctrl> + <Enter>~
+** db run all above commands up to                                     :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851838459
+   :END: 
+*** Front
+Run all databricks cells up to the current cell
+*** Back
+~<Shift> + <Alt> + <Up>~
+** db run all up to current                                            :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851838606
+   :END: 
+*** Front
+In databricks, run all cells /including/ the current
+*** Back
+~<Shift> + <Alt> + <Down>~
+** db jump up or down                                                  :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851838734
+   :END: 
+*** Front
+Jump up or down a cell in databricks
+*** Back
+~<Ctrl> + <Up> / <Down>~
+** DB cell above                                                       :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851838941
+   :END: 
+*** Front
+Insert a databricks cell above
+*** Back
+~<Ctrl> + <Alt> + <P>~
+** DB cell below                                                       :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851839087
+   :END: 
+*** Front
+Insert a databricks cell below
+*** Back
+~<Ctrl> + <Alt> + <N>~
+** DB split cell                                                       :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851839224
+   :END: 
+*** Front
+Split the databricks cell at the cursor
+*** Back
+~<Ctrl> + <Alt> + <->~
+** db move cell up/down                                                :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851839453
+   :END: 
+*** Front
+Move a databricks cell up/down
+*** Back
+~<Ctrl> + <Alt> + <Up>/<Down>~
+** db toggle comments                                                  :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851839591
+   :END: 
+*** Front
+Toggle the databricks comments panel
+*** Back
+~<ctrl> + <alt> + <M>~
+** Copy DB cell                                                        :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851839728
+   :END: 
+*** Front
+Copy the current databricks cell
+*** Back
+~<Ctrl> + <Alt> + <C>~
+** Cut DB cell                                                         :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851839940
+   :END: 
+*** Front
+Cut the current databricks cell
+*** Back
+~<Ctrl> + <Alt> + <X>~
+** Paste DB cell                                                       :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851840078
+   :END: 
+*** Front
+Paste the current databricks cell
+*** Back
+~<Ctrl> + <Alt> + <V>~
+** Delete DB cell                                                      :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851840226
+   :END: 
+*** Front
+Delete the current databricks cell
+*** Back
+~<Ctrl> + <Alt> + <D>~
+** Databricks unindent                                                 :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851840435
+   :END: 
+*** Front
+Unindent a selection in databricks
+*** Back
+~<Shift> + <Tab>~
+** Indent a databricks selection                                       :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851840581
+   :END: 
+*** Front
+Indent a selection in a databricks cell
+*** Back
+~<Tab>~
+** Databricks comment line                                             :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851840740
+   :END: 
+*** Front
+Comment a line in databricks
+*** Back
+~<Ctrl> + </>~
+** DB select multiple                                                  :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851840970
+   :END: 
+*** Front
+Select multiple databricks cells
+*** Back
+~<Ctrl> + <Click>~
+** DB command delete                                                   :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851841112
+   :END: 
+*** Front
+Quickly delete a cell in databricks
+*** Back
+~<Shift> + <D> <D>~
+** DB command cut/copy/paste                                           :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851841242
+   :END: 
+*** Front
+In command mode, what are the commands for cut, copy, and paste?
+*** Back
+~<X> <C> <V>~
+** db command paste above                                              :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851841451
+   :END: 
+*** Front
+In databricks command mode, paste a cell above the current point
+*** Back
+~<Shift> + <V>~
+** DB command insert below                                             :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851841602
+   :END: 
+*** Front
+In databricks command mode, insert a cell below
+*** Back
+~<B>~
+** DB command scroll up/down                                           :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851841762
+   :END: 
+*** Front
+In databricks command mode, scroll up or down
+*** Back
+~<Space>  / <Shift> + <Space>~
+** DB command help                                                     :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851841993
+   :END: 
+*** Front
+In databricks command mode, toggle the shortcuts menu
+*** Back
+~<H>~
+** DB command merge                                                    :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851842147
+   :END: 
+*** Front
+In databricks command mode, merge the current cell with the one below
+*** Back
+~<Shift> + <M>~
+** DB command move up                                                  :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851842280
+   :END: 
+*** Front
+Move to previous cell in databricks command mode
+*** Back
+~<P> / <K>~
+** DB command move down                                                :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851842487
+   :END: 
+*** Front
+Move to next cell in Databricks command mode
+*** Back
+~<N> / <J>~
+** DB command toggle line numbers                                      :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-04-27 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Databricks self-documentation
+   :ANKI_NOTE_ID: 1524851842632
+   :END: 
+*** Front
+Toggle line numbers in DB command mode
+*** Back
+~<L>~
+
+
 * Emacs                                                                :deck: 
 ** remove agenda filter                                                :note:
    :PROPERTIES:
