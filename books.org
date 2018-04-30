@@ -530,8 +530,18 @@ Case classes reduce the barrier to entry for defining your own types, which in t
 case class Cat(color: String, food: String)
 
 #+END_SRC
-**** 3.4.5
+**** 3.4.5.2
+#+BEGIN_SRC scala
 
+case class Director(name: String, 
+
+case class Film(director: Director, 
+
+object Film {
+
+}
+// case classes auto-create companion objects
+#+END_SRC
 * Spark: The Definitive Guide
 
 ** Shuffling
