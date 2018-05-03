@@ -825,6 +825,7 @@ They enforce a clear separation between run-time data and compile-time methods.
    :CREATED:  [2018-04-27 Fri]
    :ANKI_NOTE_TYPE: Basic
    :SOURCE: Trial and error
+   :ANKI_NOTE_ID: 1525385017250
    :END: 
 *** Front
 Return a new list ~l~ with element ~i~ added
@@ -1410,7 +1411,6 @@ Toggle line numbers in DB command mode
 *** Back
 ~<L>~
 
-
 * Emacs                                                                :deck: 
 ** remove agenda filter                                                :note:
    :PROPERTIES:
@@ -1660,4 +1660,48 @@ If you're stuck when writing a function, {{c1:: think of it in its mathematical 
    :END:
 *** Text
 When you can, keep templates for {{c1:: data types}} separate from templates for {{c2:: functions}}.
+*** Extra
+* Python                                                               :deck:
+** Holoviews color a category                                          :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-03 Thu]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: [[https://stackoverflow.com/questions/47657085/holoviews-color-per-category][Stack Overflow]]
+   :ANKI_NOTE_ID: 1525385027889
+   :END: 
+*** Front
+Assign colors to categorical data in a Holoviews plot object
+*** Back
+#+BEGIN_SRC python
+
+hv_plot_obj.opts(plot={'color_index':'category'})
+
+#+END_SRC
+** holoviews no border                                                 :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-03 Thu]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Trial and error
+   :ANKI_NOTE_ID: 1525385028029
+   :END: 
+*** Front
+remove the border line from a single HoloViews Polygon object
+*** Back
+#+BEGIN_SRC python
+poly_obj.opts(style={'line_alpha':0})
+#+END_SRC
+** holoviews make selectable layers                                    :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-03 Thu]
+   :ANKI_NOTE_TYPE: Cloze
+   :SOURCE: [[http://holoviews.org/Tutorials/Containers.html][HoloViews Documentation]]
+   :ANKI_NOTE_ID: 1525385028228
+   :END: 
+*** Text
+Select different points in HoloViews by category
+#+BEGIN_SRC scala
+hv.{{c1::HoloMap}}(d:{{c2::hv.Points}}(data[{{c3::data['category'] == d}}],
+    {{c4::kdims=['x','y']}}) for d in {{c5::data['category'].unique()}})
+
+#+END_SRC
 *** Extra
