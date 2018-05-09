@@ -530,18 +530,50 @@ Case classes reduce the barrier to entry for defining your own types, which in t
 case class Cat(color: String, food: String)
 
 #+END_SRC
-**** 3.4.5.2
+**** 3.4.5.2 Director v2
 #+BEGIN_SRC scala
 
-case class Director(name: String, 
+case class Director(firstName: String, lastName: String, yearOfBirth: String) {
+  def name = firstName + " " + lastName
+}
 
-case class Film(director: Director, 
+object Director {
+  def older(director1: Director, director2: Director) = 
+    if (director1.yearOfBirth < director2.yearOfBirth) director1 else director2
+}
 
-object Film {
+
+case class Film(name: String, yearOfRelease: Int, 
+  imdbRaing: Double, director: Director) {
+  def directorsAge = yearOfRelease - director.yearOfBirth
+  def isDirectedBy(d: Director): Boolean = d == this.director
+
+  def copy(name: String = name, 
+           yearOfRelease: Int = yearOfRelease,
+           imdbRating: Double = imdbRating,
+           director: Director = director) = {
+    new Film(name, yearOfRelase, imdbRating, director)
+  }
 
 }
-// case classes auto-create companion objects
+// case classes auto-create companion objects, but we can add to them
+object Film {
+  def newer(film1: Film, film2: Film): Film = 
+    if (film1.yearOfRelease < film2.yearOfRelease) film1 else film2
+
+  def highestRating(film1: Film, film2: Film): Double = {
+    val rating1 = film1.imdbRating
+    val rating2 = film2.imdbRating
+    if (rating1 > rating2) rating1 else rating2
+  }
+  def oldestDirectorAtTheTime(film1: Film, film2: Film): Director = 
+    if (film.directorsAge > film2.directorsAge) film1.director else film2.director
+}
+
 #+END_SRC
+
+What's the difference between the methods that go in the class and the methods that go in the companion object? While the methods in the companion object might make reference to the run-time data of /other/ Film/Director objects, they do not refer to /their own/ run-time data - they can be used without instantiating an object in addition to the two objects being compared in the method ~highestRating~, for example.
+
 * Spark: The Definitive Guide
 
 ** Shuffling
