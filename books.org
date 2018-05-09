@@ -573,7 +573,37 @@ object Film {
 #+END_SRC
 
 What's the difference between the methods that go in the class and the methods that go in the companion object? While the methods in the companion object might make reference to the run-time data of /other/ Film/Director objects, they do not refer to /their own/ run-time data - they can be used without instantiating an object in addition to the two objects being compared in the method ~highestRating~, for example.
+**** 3.4.5.3 Case Class Counter
+#+BEGIN_SRC scala
 
+case class Adder(i: Int) = {
+      def apply(v: Int = 0) = i + v
+    }
+
+
+
+    case class Counter(i: Int = 0) {
+      def inc = copy(i = i + 1)
+      def dec = copy(i = i - 1)
+      def adjust(a: Adder) = copy(i = a(i))
+    }
+
+
+#+END_SRC
+**** 3.4.5.4 Application, Application, Application
+#+BEGIN_SRC scala
+
+  case class Person(firstName: String, lastName: String)
+
+  object Person {
+  def apply(name: String): Person = {
+	    val parts = name.split(" ")
+	    val (first, last) = (parts(0), parts(1)
+	    apply(first, last)
+      }
+      #+END_SRC
+
+Now we see why companion objects are used so often for the factory pattern: they allow for easy method overloading when paired with a case class.
 * Spark: The Definitive Guide
 
 ** Shuffling
