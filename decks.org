@@ -831,6 +831,16 @@ They enforce a clear separation between run-time data and compile-time methods.
 Return a new list ~l~ with element ~i~ added
 *** Back
 ~l :+ i~
+** static vs not static methods                                        :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-09 Wed]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 3, [[https://stackoverflow.com/questions/2671496/java-when-to-use-static-methods][Stack Overflow]]
+   :END: 
+*** Front
+When would you put a method in a companion object?
+*** Back
+When you want a static method - a method that can be used without creating an instance of the object.
 * Spark                                                                :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:
@@ -1411,6 +1421,46 @@ Toggle line numbers in DB command mode
 *** Back
 ~<L>~
 
+** col with period in it                                               :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-08 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Trial and error
+   :END: 
+*** Front
+Your column name has a period in it.
+*** Back
+Replace it with a different character
+** geospark load wkt                                                   :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-08 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Geospark documentation
+   :END: 
+*** Front
+Load a wkt column in geospark
+*** Back
+#+BEGIN_SRC scala
+val parsedDF = df.selectExpr("*", "ST_GeomFromWKT(wkt) AS geom")
+#+END_SRC
+** geospark spatial join                                               :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-08 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Geospark documentation
+   :END: 
+*** Front
+Perform a spatial join in geospark
+*** Back
+#+BEGIN_SRC scala
+df1.createOrReplaceTempView("df1")
+df2.createOrReplaceTempView("df2")
+#+END_SRC
+
+#+BEGIN_SRC sql
+%sql
+SELECT * FROM df1, df2 WHERE ST_Intersects(df1.geom, df2.geom)
+#+END_SRC
 * Emacs                                                                :deck: 
 ** remove agenda filter                                                :note:
    :PROPERTIES:
