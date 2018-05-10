@@ -533,7 +533,7 @@ case class Cat(color: String, food: String)
 **** 3.4.5.2 Director v2
 #+BEGIN_SRC scala
 
-case class Director(firstName: String, lastName: String, yearOfBirth: String) {
+case class Director(firstName: String, lastName: String, yearOfBirth: Int) {
   def name = firstName + " " + lastName
 }
 
@@ -544,7 +544,7 @@ object Director {
 
 
 case class Film(name: String, yearOfRelease: Int, 
-  imdbRaing: Double, director: Director) {
+  imdbRating: Double, director: Director) {
   def directorsAge = yearOfRelease - director.yearOfBirth
   def isDirectedBy(d: Director): Boolean = d == this.director
 
@@ -552,7 +552,7 @@ case class Film(name: String, yearOfRelease: Int,
            yearOfRelease: Int = yearOfRelease,
            imdbRating: Double = imdbRating,
            director: Director = director) = {
-    new Film(name, yearOfRelase, imdbRating, director)
+    new Film(name, yearOfRelease, imdbRating, director)
   }
 
 }
@@ -567,7 +567,7 @@ object Film {
     if (rating1 > rating2) rating1 else rating2
   }
   def oldestDirectorAtTheTime(film1: Film, film2: Film): Director = 
-    if (film.directorsAge > film2.directorsAge) film1.director else film2.director
+    if (film1.directorsAge > film2.directorsAge) film1.director else film2.director
 }
 
 #+END_SRC
@@ -604,6 +604,61 @@ case class Adder(i: Int) = {
       #+END_SRC
 
 Now we see why companion objects are used so often for the factory pattern: they allow for easy method overloading when paired with a case class.
+*** 3.5 Pattern matching
+#+BEGIN_SRC scala
+case class Person(firstName: String, lastName: String)
+object Stormtrooper {
+  def inspect(person: Person): String =
+    person match {
+      case Person("Luke", "Skywalker") => "Stop, rebel scum!"
+      case Person("Han", "Solo") => "Stop, rebel scum!"
+      case Person(first, last) => s"Move along, $first"
+    }
+}
+
+#+END_SRC
+**** 3.5.3.1 Feed the cats
+#+BEGIN_SRC scala
+case class Cat(color: String, food: String)
+
+object ChipShop {
+  def willServe(c: Cat): Boolean = {
+    c match {
+      case Cat(_, "chips") => true
+      case _ => false
+    }
+  }
+}
+
+#+END_SRC
+**** 3.5.3.2 Get off my lawn!
+#+BEGIN_SRC scala
+
+val clint = Director("Clint", "Eastwood", 1930)
+val jmt = Director("John", "McTiernan", 1944)
+val lettersFromIwoJima = Film("Letters From Iwo Jima", 2006, 7.9, clint)
+val theMatrix = Film("The Matrix", 1999, 8.5, 
+Director("The", "Wachowskis", 1970))
+
+
+object Dad {
+   def rate(movie: Film): Double = {
+     movie match {
+      case it if movie.isDirectedBy(clint) => 10.0
+      case it if movie.isDirectedBy(jmt) => 7.0
+      case Film(_, _, _, _) => 3.0
+    }
+  }
+}
+
+
+assert(Dad.rate(lettersFromIwoJima) == 10.0)
+assert(Dad.rate(theMatrix) == 3.0)
+
+#+END_SRC
+
+One point of pattern matching is to make the structure of code that operates on objects match the code that defines the objects while still allowing you to abstract away the differences between those objects.
+
 * Spark: The Definitive Guide
 
 ** Shuffling
