@@ -841,6 +841,16 @@ Return a new list ~l~ with element ~i~ added
 When would you put a method in a companion object?
 *** Back
 When you want a static method - a method that can be used without creating an instance of the object.
+** vals in traits                                                      :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-11 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 4
+   :END: 
+*** Front
+Should you use vals in a trait?
+*** Back
+No, you should use def.
 * Spark                                                                :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:

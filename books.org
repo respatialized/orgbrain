@@ -658,7 +658,122 @@ assert(Dad.rate(theMatrix) == 3.0)
 #+END_SRC
 
 One point of pattern matching is to make the structure of code that operates on objects match the code that defines the objects while still allowing you to abstract away the differences between those objects.
+** Chapter 4: Modeling data with Traits
+Traits are the primary means by which you can build modular classes in Scala.
+#+BEGIN_QUOTE
+ In this chapter we will initially focus on the technical aspects of traits.
+Our focus will then change to using Scala as a medium to express our thoughts.
 
+We will see how we can mechanically transform a description of data, called an algebraic datatype, into
+code. Using structural recursion we can mechanically write code that transforms an algebraic datatype.
+#+END_QUOTE
+Structural recursion? An idea from Felleisen et. al? I knew this book was good.
+*** 4.1 Traits
+
+Hard to maintain code: 
+#+BEGIN_SRC scala
+
+import java.util.Date
+case class Anonymous(id: String, createdAt: Date = new Date())
+
+case class User(
+  id: String,
+  email: String,
+  createdAt: Date = new Date()
+)
+
+#+END_SRC
+
+More idiomatic, maintainable code with traits:
+#+BEGIN_SRC scala
+import java.util.Date
+
+trait Visitor {
+  def id: String      // Unique id assigned to each user
+  def createdAt: Date // Date the user first visited the site
+
+  def age: Long = new Date().getTime - createdAt.getTime
+}
+
+case class Anonymous(id: String, createdAt: Date = new Date()) extends Visitor
+
+case class User(
+  id: String,
+  email: String,
+  createdAt: Date = new Date()
+) extends Visitor
+
+#+END_SRC
+
+Traits can name abstract methods whose implementations depend upon the classes that inherit from those traits.
+**** 4.1.4.1 Cats, cats, and more cats
+#+BEGIN_SRC scala
+trait Feline {
+  def color: String
+  def sound: String = "roar"
+}
+
+case class Tiger(color: String = "Orange and black") extends Feline
+case class Cat(color: String, food: String) extends Feline {
+  override def sound: String = "meow",
+}
+case class Lion(color: String = "Yellow", maneSize: Int) extends Feline {
+}
+#+END_SRC
+My solution above is considered bad practice when compared with idiomatic Scala - while overrides of defaults defined in a trait are allowed by the compiler, it generally makes more sense to only define default values in a trait if they apply to /all/ subtypes of that trait.
+**** 4.1.4.2 Shaping up with Traits
+#+BEGIN_SRC scala
+
+trait Shape {
+  def sides: Int
+  def perimeter: Double
+  def area: Double
+}
+
+case class Circle(radius: Double) extends Shape {
+  def sides = 1
+  def perimeter = math.Pi * radius * 2.0
+  def area = math.Pi * radius * radius
+}
+
+case class Rectangle(width: Double, height: Double) extends Shape {
+  def sides = 4
+  def perimeter = width * 2 + height * 2
+  def area = width * height
+}
+
+case class Square(width: Double) extends Shape {
+  def sides = 4
+  def perimeter = width * 4
+  def area = width * width
+}
+
+#+END_SRC
+**** 4.1.4.3 Shaping up 2 (Da Streets)
+
+#+BEGIN_SRC scala
+
+trait Shape {
+  def sides: Int
+  def perimeter: Double
+  def area: Double
+}
+
+trait Rectangular extends Shape {
+  def width: Double
+  def height: Double
+  def sides: Int = 4
+  def perimeter: Double = width * 2 + height * 2
+  def area: Double = width * height
+}
+
+case class Square(val size: Int) extends Rectangular {
+  val width = size
+  val height = size
+}
+
+#+END_SRC
+It's hard to model the /constraint/ of a square - that the height and width must /always/ be equal - in the type system, but the solution did a better job of trying than I did.
 * Spark: The Definitive Guide
 
 ** Shuffling
