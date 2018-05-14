@@ -668,6 +668,7 @@ We will see how we can mechanically transform a description of data, called an a
 code. Using structural recursion we can mechanically write code that transforms an algebraic datatype.
 #+END_QUOTE
 Structural recursion? An idea from Felleisen et. al? I knew this book was good.
+
 *** 4.1 Traits
 
 Hard to maintain code: 
@@ -774,6 +775,74 @@ case class Square(val size: Int) extends Rectangular {
 
 #+END_SRC
 It's hard to model the /constraint/ of a square - that the height and width must /always/ be equal - in the type system, but the solution did a better job of trying than I did.
+*** 4.2 This or That and Nothing Else: Sealed Traits
+Sealed traits are used when we can specify all possible classes that extend a given trait. This helps us by putting information about the purpose of our trait in a form the compiler can understand - once a sealed trait has all of its classes enumerated, the compiler will show a warning if miss one class when pattern matching against that trait.
+
+The ~sealed~ keyword prevents extension of a trait outside the given file. The ~final~ keyword prevents a class from being extended further. Both of them work in tandem to prevent your program or library from becoming a maze of inheritance and nested subtypes.
+
+#+BEGIN_SRC scala
+
+import java.util.Date
+
+sealed trait Visitor {
+  def id: String      // Unique id assigned to each user
+  def createdAt: Date // Date the user first visited the site
+  def age: Long = new Date().getTime - createdAt.getTime
+}
+
+final case class Anonymous(id: String, createdAt: Date = new Date()) extends Visitor
+
+final case class User(
+  id: String,
+  email: String,
+  createdAt: Date = new Date()
+) extends Visitor
+#+END_SRC
+
+The book calls this practice the /sealed trait pattern/. It advises that you use it in most cases, because it helps "make stronger guarantees about the behaviour of subtypes."
+**** 4.2.2.1 Printing shapes
+#+BEGIN_SRC scala
+trait Shape {
+  def sides: Int
+  def perimeter: Double
+  def area: Double
+}
+
+final case class Circle(radius: Double) extends Shape {
+  def sides = 1
+  def perimeter = math.Pi * radius * 2.0
+  def area = math.Pi * radius * radius
+}
+
+
+trait Rectangular extends Shape {
+  def width: Double
+  def height: Double
+  def sides: Int = 4
+  def perimeter: Double = width * 2 + height * 2
+  def area: Double = width * height
+}
+
+final case class Rectangle(width: Double, height: Double) extends Rectangular
+
+final case class Square(val size: Int) extends Rectangular {
+  val width = size
+  val height = size
+}
+
+object Draw {
+  def apply(s: Shape): String = {
+    s match {
+      case Square(size) => "A square with a side length of " + size
+      case Rectangle(width, height) => 
+        "A rectangle of width " + width + " and height " + height
+      case Circle(radius) => "A circle of radius " + radius
+    }
+  }
+}
+
+#+END_SRC
+
 * Spark: The Definitive Guide
 
 ** Shuffling
