@@ -836,6 +836,7 @@ Return a new list ~l~ with element ~i~ added
    :CREATED:  [2018-05-09 Wed]
    :ANKI_NOTE_TYPE: Basic
    :SOURCE: Essential Scala, chapter 3, [[https://stackoverflow.com/questions/2671496/java-when-to-use-static-methods][Stack Overflow]]
+   :ANKI_NOTE_ID: 1526312625344
    :END: 
 *** Front
 When would you put a method in a companion object?
@@ -846,6 +847,7 @@ When you want a static method - a method that can be used without creating an in
    :CREATED:  [2018-05-11 Fri]
    :ANKI_NOTE_TYPE: Basic
    :SOURCE: Essential Scala, chapter 4
+   :ANKI_NOTE_ID: 1526312625565
    :END: 
 *** Front
 Should you use vals in a trait?
@@ -1436,6 +1438,7 @@ Toggle line numbers in DB command mode
    :CREATED:  [2018-05-08 Tue]
    :ANKI_NOTE_TYPE: Basic
    :SOURCE: Trial and error
+   :ANKI_NOTE_ID: 1526312632802
    :END: 
 *** Front
 Your column name has a period in it.
@@ -1446,6 +1449,7 @@ Replace it with a different character
    :CREATED:  [2018-05-08 Tue]
    :ANKI_NOTE_TYPE: Basic
    :SOURCE: Geospark documentation
+   :ANKI_NOTE_ID: 1526312633012
    :END: 
 *** Front
 Load a wkt column in geospark
@@ -1458,6 +1462,7 @@ val parsedDF = df.selectExpr("*", "ST_GeomFromWKT(wkt) AS geom")
    :CREATED:  [2018-05-08 Tue]
    :ANKI_NOTE_TYPE: Basic
    :SOURCE: Geospark documentation
+   :ANKI_NOTE_ID: 1526312633198
    :END: 
 *** Front
 Perform a spatial join in geospark
@@ -1470,6 +1475,19 @@ df2.createOrReplaceTempView("df2")
 #+BEGIN_SRC sql
 %sql
 SELECT * FROM df1, df2 WHERE ST_Intersects(df1.geom, df2.geom)
+#+END_SRC
+** joining DFs                                                         :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-14 Mon]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: [[https://stackoverflow.com/a/43518900][Stack overflow]]
+   :ANKI_NOTE_ID: 1526312633431
+   :END: 
+*** Front
+What's the best way to join a list of dataframes without using ~unionAll~ (e.g. without an initial DF?)
+*** Back
+#+BEGIN_SRC scala
+dfs.reduce(_.union(_))
 #+END_SRC
 * Emacs                                                                :deck: 
 ** remove agenda filter                                                :note:
