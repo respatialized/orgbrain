@@ -1489,6 +1489,16 @@ What's the best way to join a list of dataframes without using ~unionAll~ (e.g. 
 #+BEGIN_SRC scala
 dfs.reduce(_.union(_))
 #+END_SRC
+** sealed trait inheritance/extension                                  :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-15 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 4, trial and error
+   :END: 
+*** Front
+The compiler warns you about a match expression - you're not using a trait that extends a sealed trait.
+*** Back
+Make the inheritor trait sealed as well, and ensure all types that extend it are in the match expression.
 * Emacs                                                                :deck: 
 ** remove agenda filter                                                :note:
    :PROPERTIES:

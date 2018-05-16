@@ -802,7 +802,7 @@ final case class User(
 The book calls this practice the /sealed trait pattern/. It advises that you use it in most cases, because it helps "make stronger guarantees about the behaviour of subtypes."
 **** 4.2.2.1 Printing shapes
 #+BEGIN_SRC scala
-trait Shape {
+sealed trait Shape {
   def sides: Int
   def perimeter: Double
   def area: Double
@@ -815,7 +815,7 @@ final case class Circle(radius: Double) extends Shape {
 }
 
 
-trait Rectangular extends Shape {
+sealed trait Rectangular extends Shape {
   def width: Double
   def height: Double
   def sides: Int = 4
@@ -842,7 +842,108 @@ object Draw {
 }
 
 #+END_SRC
+**** 4.2.2.2 The color and the shape
 
+#+BEGIN_SRC scala
+/* Models colors with RGB values between 0 and 1 */
+sealed trait Color {
+  def r: Double
+  def g: Double
+  def b: Double
+  def isLight(): Boolean = {r + g + b >= 1.0} // not how color theory works at all
+}
+
+final case object Red extends Color {
+  val r = 1.0
+  val g = 0.0
+  val b = 0.0
+}
+
+final case object Yellow extends Color {
+  val r = 1.0
+  val g = 1.0
+  val b = 0.0
+}
+
+final case object Pink extends Color {
+  val r = 1.0
+  val g = 1.0
+  val b = 0.7
+}
+
+final case class CustomColor(r: Double, g: Double, b: Double) extends Color
+
+sealed trait Shape {
+  def sides: Int
+  def perimeter: Double
+  def area: Double
+  def color: Color
+}
+
+final case class Circle(radius: Double, color: Color) extends Shape {
+  def sides = 1
+  def perimeter = math.Pi * radius * 2.0
+  def area = math.Pi * radius * radius
+}
+
+
+sealed trait Rectangular extends Shape {
+  def width: Double
+  def height: Double
+  def sides: Int = 4
+  def perimeter: Double = width * 2 + height * 2
+  def area: Double = width * height
+}
+
+final case class Rectangle(width: Double, height: Double, color: Color) extends Rectangular
+
+final case class Square(val size: Double, color: Color) extends Rectangular {
+  val width = size
+  val height = size
+}
+
+// question: why define a color on the trait if it's getting passed to Draw?
+
+object Draw {
+  def apply(s: Shape, c: Color): String = {
+    def colorHelper(col: Color): String = {
+      col match {
+        case Pink => "pink"
+        case Red => "red"
+        case Yellow => "yellow"
+        case _ => if (col.isLight) "light" else "dark"
+      }
+    }
+    s match {
+      case Square(size, _) => "A " + colorHelper(c) + " square with a side length of " + size
+      case Rectangle(width, height, _) => 
+        "A " + colorHelper(c) + " rectangle of width " + width + " and height " + height
+      case Circle(radius, _) => "A " + colorHelper(c) +  " circle of radius " + radius
+    }
+  }
+  def apply(s: Shape): String = {
+    def colorHelper(col: Color): String = {
+      col match {
+        case Pink => "pink"
+        case Red => "red"
+        case Yellow => "yellow"
+        case CustomColor(_, _, _) => if (col.isLight) "light" else "dark"
+      }
+    }
+    s match {
+      case Square(size, c) => "A " + colorHelper(c) + " square with a side length of " + size
+      case Rectangle(width, height, c) => 
+        "A " + colorHelper(c) + " rectangle of width " + width + " and height " + height
+      case Circle(radius, c) => "A " + colorHelper(c) +  " circle of radius " + radius
+    }
+  }
+}
+
+#+END_SRC
+In writing this solution, I forgot about case objects. It would have simplified the predefined colors bit a lot.
+I also forgot about method overloading, which could have been used to let Draw's ~apply~ method use the shape's already-defined color field.
+
+Once I changed the code to have those features, it worked as expected.
 * Spark: The Definitive Guide
 
 ** Shuffling
