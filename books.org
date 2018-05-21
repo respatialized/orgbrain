@@ -944,6 +944,46 @@ In writing this solution, I forgot about case objects. It would have simplified 
 I also forgot about method overloading, which could have been used to let Draw's ~apply~ method use the shape's already-defined color field.
 
 Once I changed the code to have those features, it worked as expected.
+**** 4.2.2.3 A Short Division Exercise
+#+BEGIN_SRC scala
+sealed trait DivisionResult {
+}
+
+final case class Finite(x: Int) extends DivisionResult
+
+final case class Infinite() extends DivisionResult
+
+case object divide {
+  def apply(num: Int, denom: Int): DivisionResult = {
+     denom match {
+       case 0 => Infinite()
+       case _ => Finite(num/denom)
+     }
+ }
+}
+
+
+assert(divide(1,0) == Infinite())
+assert(divide(4,2) == Finite(2))
+
+val divide2by = (denom: Int) => {
+  val res = divide(2, denom)
+  res match {
+    case Infinite() => "ERROR: Division by 0."
+    case Finite(x) => "Result: " + x.toString
+  }
+}
+
+#+END_SRC
+
+It was hard to remember that the values of classes have to be explicitly stated in the match expression if you want to refer to them in the sub-expressions.
+
+I also forgot to mark the two case classes as final, which is an important habit for reminding yourself when you've enumerated all the possibilities of a trait.
+*** 4.3 Modeling Data with Traits
+This section takes things from language features to the powerful idea of algebraic data types, which enumerate the logical relationships in the data we're modeling.
+
+
+
 * Spark: The Definitive Guide
 
 ** Shuffling
