@@ -70,9 +70,9 @@ List.fill(n)(i)
 Get the current timestamp in Scala (and Java)
 *** Back
 #+begin_src scala
-Calendar.getInstance.getTime.toInstant.atZone(ZoneId.of("America/New_York")).toLocalDate
+java.Time.LocalDateTime.now()
 #+end_src  
-It has to be a new calendar instance!
+
 ** top class in scala                                                  :note:
    :PROPERTIES:
    :ANKI_NOTE_TYPE: Basic
@@ -853,6 +853,18 @@ When you want a static method - a method that can be used without creating an in
 Should you use vals in a trait?
 *** Back
 No, you should use def.
+** sealed trait inheritance/extension                                  :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-15 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 4, trial and error
+   :ANKI_NOTE_ID: 1526913598537
+   :END: 
+*** Front
+The compiler warns you about a match expression - you're not using a trait that extends a sealed trait.
+*** Back
+Make the inheritor trait sealed as well, and ensure all types that extend it are in the match expression.
+
 * Spark                                                                :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:
@@ -1489,16 +1501,32 @@ What's the best way to join a list of dataframes without using ~unionAll~ (e.g. 
 #+BEGIN_SRC scala
 dfs.reduce(_.union(_))
 #+END_SRC
-** sealed trait inheritance/extension                                  :note:
+** explicitly set sub-partitions in spark                              :note:
    :PROPERTIES: 
-   :CREATED:  [2018-05-15 Tue]
+   :CREATED:  [2018-05-21 Mon]
    :ANKI_NOTE_TYPE: Basic
-   :SOURCE: Essential Scala, chapter 4, trial and error
+   :SOURCE: [[https://spark.apache.org/docs/2.3.0/api/scala/index.html#org.apache.spark.sql.Dataset][Spark Dataset API documentation]]
+   :ANKI_NOTE_ID: 1526913598713
    :END: 
 *** Front
-The compiler warns you about a match expression - you're not using a trait that extends a sealed trait.
+Set the number of sub-partitions to use when repartitioning by a column
 *** Back
-Make the inheritor trait sealed as well, and ensure all types that extend it are in the match expression.
+#+BEGIN_SRC scala
+df.repartition(numPartitions=n, $"colName")
+#+END_SRC
+** rangePartitioner                                                    :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-21 Mon]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: [[https://spark.apache.org/docs/2.3.0/api/scala/index.html#org.apache.spark.RangePartitioner][Spark RangePartitioner API docs]]
+   :ANKI_NOTE_ID: 1526913598868
+   :END: 
+*** Front
+When you want to repartition and evenly distribute the values of a sortable column into n groups
+*** Back
+#+BEGIN_SRC scala
+df.repartitionByRange(numPartitions=n, $"colName")
+#+END_SRC
 * Emacs                                                                :deck: 
 ** remove agenda filter                                                :note:
    :PROPERTIES:
