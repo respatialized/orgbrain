@@ -865,6 +865,83 @@ The compiler warns you about a match expression - you're not using a trait that 
 *** Back
 Make the inheritor trait sealed as well, and ensure all types that extend it are in the match expression.
 
+** sum type pattern implementation                                     :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-22 Tue]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: Essential Scala, chapter 4
+   :ANKI_NOTE_ID: 1527007267451
+   :END: 
+*** Front
+implement the sum type pattern
+*** Back
+#+BEGIN_SRC scala
+sealed trait A
+final case class B() extends A
+final case class C() extends A
+#+END_SRC
+** the sum type pattern (description)                                  :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-22 Tue]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: Essential Scala, chapter 4
+   :ANKI_NOTE_ID: 1527007267591
+   :END: 
+*** Front
+Another way of describing the sum type pattern
+*** Back
+A is a B /or/ C
+** product type pattern implementation (class)                         :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-22 Tue]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: Essential Scala, chapter 4
+   :ANKI_NOTE_ID: 1527007267837
+   :END: 
+*** Front
+Implement the product type pattern as a class
+*** Back
+#+BEGIN_SRC scala
+case class A(b: B, c: C)
+#+END_SRC
+** product type pattern implementation (trait)                         :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-22 Tue]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: Essential Scala, chapter 4
+   :ANKI_NOTE_ID: 1527007267970
+   :END: 
+*** Front
+Implement the product type pattern as a trait
+*** Back
+#+BEGIN_SRC scala
+trait A {
+  def b: B 
+  def c: C
+}
+#+END_SRC
+** product type description                                            :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-22 Tue]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: Essential Scala, chapter 4
+   :ANKI_NOTE_ID: 1527007268131
+   :END: 
+*** Front
+Another way of describing the product type pattern
+*** Back
+A has a B /and/ C
+** consider a case object instead                                      :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-22 Tue]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: Essential Scala, chapter 4
+   :ANKI_NOTE_ID: 1527007321199
+   :END: 
+*** Front
+You haven't yet specified how instances of this class might differ from one another.
+*** Back
+A case object might be a good idea.
 * Spark                                                                :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:
@@ -1526,6 +1603,19 @@ When you want to repartition and evenly distribute the values of a sortable colu
 *** Back
 #+BEGIN_SRC scala
 df.repartitionByRange(numPartitions=n, $"colName")
+#+END_SRC
+** convert DF to Dataset                                               :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-22 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Spark: The Definitive Guide, chapter 11
+   :ANKI_NOTE_ID: 1527007277336
+   :END: 
+*** Front
+Convert a DataFrame to a Dataset
+*** Back
+#+BEGIN_SRC scala
+val sampleDataset = sampleDF.as[DataCaseClass]
 #+END_SRC
 * Emacs                                                                :deck: 
 ** remove agenda filter                                                :note:
