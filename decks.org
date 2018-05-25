@@ -942,6 +942,36 @@ A has a B /and/ C
 You haven't yet specified how instances of this class might differ from one another.
 *** Back
 A case object might be a good idea.
+** scaladoc for classes                                                :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-24 Thu]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: [[https://issues.scala-lang.org/browse/SI-577][Scala JIRA (legacy)]]
+   :END: 
+*** Front
+Document the parameters in a class
+*** Back
+#+BEGIN_SRC scala
+/** The smallest representation of a row of data.
+  * @param id the dimension (index) of the data
+  * @param value the data's value
+  */
+case class A(id: Int, value: Double)
+
+#+END_SRC
+
+** stable string hashes                                                :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-25 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: [[https://www.scala-lang.org/api/2.12.2/scala/util/hashing/MurmurHash3$.html][Scala Standard Library]]
+   :END: 
+*** Front
+ensure that a string is consistently hashed
+*** Back
+#+BEGIN_SRC scala
+scala.util.hashing.MurmurHash3.stringHash(str)
+#+END_SRC
 * Spark                                                                :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:
