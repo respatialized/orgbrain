@@ -947,6 +947,7 @@ A case object might be a good idea.
    :CREATED:  [2018-05-24 Thu]
    :ANKI_NOTE_TYPE: Basic
    :SOURCE: [[https://issues.scala-lang.org/browse/SI-577][Scala JIRA (legacy)]]
+   :ANKI_NOTE_ID: 1527264158910
    :END: 
 *** Front
 Document the parameters in a class
@@ -965,6 +966,7 @@ case class A(id: Int, value: Double)
    :CREATED:  [2018-05-25 Fri]
    :ANKI_NOTE_TYPE: Basic
    :SOURCE: [[https://www.scala-lang.org/api/2.12.2/scala/util/hashing/MurmurHash3$.html][Scala Standard Library]]
+   :ANKI_NOTE_ID: 1527264159074
    :END: 
 *** Front
 ensure that a string is consistently hashed
