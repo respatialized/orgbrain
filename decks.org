@@ -1625,6 +1625,40 @@ In quil, set up a dynamic sketch in clojure from the REPL
 Specify a variable number of arguments in a function definition
 *** Back
 ~[& args]~
+** random float                                                        :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-18 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+get a random float between 0 and n
+*** Back
+#+BEGIN_SRC clojure
+(rand n)
+#+END_SRC
+
+** random int                                                          :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-18 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+Get a random int between 0 and n (exclusive)
+*** Back
+#+BEGIN_SRC clojure
+(rand-int n)
+#+END_SRC
+** clojure random item                                                 :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-18 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :END: 
+*** Front
+Pick a random item from a list
+*** Back
+#+BEGIN_SRC clojure
+(rand-nth list)
+#+END_SRC
 * Data Science                                                         :deck:
 ** k-means step                                                        :note:
    :PROPERTIES: 
