@@ -530,18 +530,577 @@ Case classes reduce the barrier to entry for defining your own types, which in t
 case class Cat(color: String, food: String)
 
 #+END_SRC
-**** 3.4.5.2
+**** 3.4.5.2 Director v2
 #+BEGIN_SRC scala
 
-case class Director(name: String, 
+case class Director(firstName: String, lastName: String, yearOfBirth: Int) {
+  def name = firstName + " " + lastName
+}
 
-case class Film(director: Director, 
+object Director {
+  def older(director1: Director, director2: Director) = 
+    if (director1.yearOfBirth < director2.yearOfBirth) director1 else director2
+}
 
-object Film {
+
+case class Film(name: String, yearOfRelease: Int, 
+  imdbRating: Double, director: Director) {
+  def directorsAge = yearOfRelease - director.yearOfBirth
+  def isDirectedBy(d: Director): Boolean = d == this.director
+
+  def copy(name: String = name, 
+           yearOfRelease: Int = yearOfRelease,
+           imdbRating: Double = imdbRating,
+           director: Director = director) = {
+    new Film(name, yearOfRelease, imdbRating, director)
+  }
 
 }
-// case classes auto-create companion objects
+// case classes auto-create companion objects, but we can add to them
+object Film {
+  def newer(film1: Film, film2: Film): Film = 
+    if (film1.yearOfRelease < film2.yearOfRelease) film1 else film2
+
+  def highestRating(film1: Film, film2: Film): Double = {
+    val rating1 = film1.imdbRating
+    val rating2 = film2.imdbRating
+    if (rating1 > rating2) rating1 else rating2
+  }
+  def oldestDirectorAtTheTime(film1: Film, film2: Film): Director = 
+    if (film1.directorsAge > film2.directorsAge) film1.director else film2.director
+}
+
 #+END_SRC
+
+What's the difference between the methods that go in the class and the methods that go in the companion object? While the methods in the companion object might make reference to the run-time data of /other/ Film/Director objects, they do not refer to /their own/ run-time data - they can be used without instantiating an object in addition to the two objects being compared in the method ~highestRating~, for example.
+**** 3.4.5.3 Case Class Counter
+#+BEGIN_SRC scala
+
+case class Adder(i: Int) = {
+      def apply(v: Int = 0) = i + v
+    }
+
+
+
+    case class Counter(i: Int = 0) {
+      def inc = copy(i = i + 1)
+      def dec = copy(i = i - 1)
+      def adjust(a: Adder) = copy(i = a(i))
+    }
+
+
+#+END_SRC
+**** 3.4.5.4 Application, Application, Application
+#+BEGIN_SRC scala
+
+  case class Person(firstName: String, lastName: String)
+
+  object Person {
+  def apply(name: String): Person = {
+	    val parts = name.split(" ")
+	    val (first, last) = (parts(0), parts(1)
+	    apply(first, last)
+      }
+      #+END_SRC
+
+Now we see why companion objects are used so often for the factory pattern: they allow for easy method overloading when paired with a case class.
+*** 3.5 Pattern matching
+#+BEGIN_SRC scala
+case class Person(firstName: String, lastName: String)
+object Stormtrooper {
+  def inspect(person: Person): String =
+    person match {
+      case Person("Luke", "Skywalker") => "Stop, rebel scum!"
+      case Person("Han", "Solo") => "Stop, rebel scum!"
+      case Person(first, last) => s"Move along, $first"
+    }
+}
+
+#+END_SRC
+**** 3.5.3.1 Feed the cats
+#+BEGIN_SRC scala
+case class Cat(color: String, food: String)
+
+object ChipShop {
+  def willServe(c: Cat): Boolean = {
+    c match {
+      case Cat(_, "chips") => true
+      case _ => false
+    }
+  }
+}
+
+#+END_SRC
+**** 3.5.3.2 Get off my lawn!
+#+BEGIN_SRC scala
+
+val clint = Director("Clint", "Eastwood", 1930)
+val jmt = Director("John", "McTiernan", 1944)
+val lettersFromIwoJima = Film("Letters From Iwo Jima", 2006, 7.9, clint)
+val theMatrix = Film("The Matrix", 1999, 8.5, 
+Director("The", "Wachowskis", 1970))
+
+
+object Dad {
+   def rate(movie: Film): Double = {
+     movie match {
+      case it if movie.isDirectedBy(clint) => 10.0
+      case it if movie.isDirectedBy(jmt) => 7.0
+      case Film(_, _, _, _) => 3.0
+    }
+  }
+}
+
+
+assert(Dad.rate(lettersFromIwoJima) == 10.0)
+assert(Dad.rate(theMatrix) == 3.0)
+
+#+END_SRC
+
+One point of pattern matching is to make the structure of code that operates on objects match the code that defines the objects while still allowing you to abstract away the differences between those objects.
+** Chapter 4: Modeling data with Traits
+Traits are the primary means by which you can build modular classes in Scala.
+#+BEGIN_QUOTE
+ In this chapter we will initially focus on the technical aspects of traits.
+Our focus will then change to using Scala as a medium to express our thoughts.
+
+We will see how we can mechanically transform a description of data, called an algebraic datatype, into
+code. Using structural recursion we can mechanically write code that transforms an algebraic datatype.
+#+END_QUOTE
+Structural recursion? An idea from Felleisen et. al? I knew this book was good.
+
+*** 4.1 Traits
+
+Hard to maintain code: 
+#+BEGIN_SRC scala
+
+import java.util.Date
+case class Anonymous(id: String, createdAt: Date = new Date())
+
+case class User(
+  id: String,
+  email: String,
+  createdAt: Date = new Date()
+)
+
+#+END_SRC
+
+More idiomatic, maintainable code with traits:
+#+BEGIN_SRC scala
+import java.util.Date
+
+trait Visitor {
+  def id: String      // Unique id assigned to each user
+  def createdAt: Date // Date the user first visited the site
+
+  def age: Long = new Date().getTime - createdAt.getTime
+}
+
+case class Anonymous(id: String, createdAt: Date = new Date()) extends Visitor
+
+case class User(
+  id: String,
+  email: String,
+  createdAt: Date = new Date()
+) extends Visitor
+
+#+END_SRC
+
+Traits can name abstract methods whose implementations depend upon the classes that inherit from those traits.
+**** 4.1.4.1 Cats, cats, and more cats
+#+BEGIN_SRC scala
+trait Feline {
+  def color: String
+  def sound: String = "roar"
+}
+
+case class Tiger(color: String = "Orange and black") extends Feline
+case class Cat(color: String, food: String) extends Feline {
+  override def sound: String = "meow",
+}
+case class Lion(color: String = "Yellow", maneSize: Int) extends Feline {
+}
+#+END_SRC
+My solution above is considered bad practice when compared with idiomatic Scala - while overrides of defaults defined in a trait are allowed by the compiler, it generally makes more sense to only define default values in a trait if they apply to /all/ subtypes of that trait.
+**** 4.1.4.2 Shaping up with Traits
+#+BEGIN_SRC scala
+
+trait Shape {
+  def sides: Int
+  def perimeter: Double
+  def area: Double
+}
+
+case class Circle(radius: Double) extends Shape {
+  def sides = 1
+  def perimeter = math.Pi * radius * 2.0
+  def area = math.Pi * radius * radius
+}
+
+case class Rectangle(width: Double, height: Double) extends Shape {
+  def sides = 4
+  def perimeter = width * 2 + height * 2
+  def area = width * height
+}
+
+case class Square(width: Double) extends Shape {
+  def sides = 4
+  def perimeter = width * 4
+  def area = width * width
+}
+
+#+END_SRC
+**** 4.1.4.3 Shaping up 2 (Da Streets)
+
+#+BEGIN_SRC scala
+
+trait Shape {
+  def sides: Int
+  def perimeter: Double
+  def area: Double
+}
+
+trait Rectangular extends Shape {
+  def width: Double
+  def height: Double
+  def sides: Int = 4
+  def perimeter: Double = width * 2 + height * 2
+  def area: Double = width * height
+}
+
+case class Square(val size: Int) extends Rectangular {
+  val width = size
+  val height = size
+}
+
+#+END_SRC
+It's hard to model the /constraint/ of a square - that the height and width must /always/ be equal - in the type system, but the solution did a better job of trying than I did.
+*** 4.2 This or That and Nothing Else: Sealed Traits
+Sealed traits are used when we can specify all possible classes that extend a given trait. This helps us by putting information about the purpose of our trait in a form the compiler can understand - once a sealed trait has all of its classes enumerated, the compiler will show a warning if miss one class when pattern matching against that trait.
+
+The ~sealed~ keyword prevents extension of a trait outside the given file. The ~final~ keyword prevents a class from being extended further. Both of them work in tandem to prevent your program or library from becoming a maze of inheritance and nested subtypes.
+
+#+BEGIN_SRC scala
+
+import java.util.Date
+
+sealed trait Visitor {
+  def id: String      // Unique id assigned to each user
+  def createdAt: Date // Date the user first visited the site
+  def age: Long = new Date().getTime - createdAt.getTime
+}
+
+final case class Anonymous(id: String, createdAt: Date = new Date()) extends Visitor
+
+final case class User(
+  id: String,
+  email: String,
+  createdAt: Date = new Date()
+) extends Visitor
+#+END_SRC
+
+The book calls this practice the /sealed trait pattern/. It advises that you use it in most cases, because it helps "make stronger guarantees about the behaviour of subtypes."
+**** 4.2.2.1 Printing shapes
+#+BEGIN_SRC scala
+sealed trait Shape {
+  def sides: Int
+  def perimeter: Double
+  def area: Double
+}
+
+final case class Circle(radius: Double) extends Shape {
+  def sides = 1
+  def perimeter = math.Pi * radius * 2.0
+  def area = math.Pi * radius * radius
+}
+
+
+sealed trait Rectangular extends Shape {
+  def width: Double
+  def height: Double
+  def sides: Int = 4
+  def perimeter: Double = width * 2 + height * 2
+  def area: Double = width * height
+}
+
+final case class Rectangle(width: Double, height: Double) extends Rectangular
+
+final case class Square(val size: Int) extends Rectangular {
+  val width = size
+  val height = size
+}
+
+object Draw {
+  def apply(s: Shape): String = {
+    s match {
+      case Square(size) => "A square with a side length of " + size
+      case Rectangle(width, height) => 
+        "A rectangle of width " + width + " and height " + height
+      case Circle(radius) => "A circle of radius " + radius
+    }
+  }
+}
+
+#+END_SRC
+**** 4.2.2.2 The color and the shape
+
+#+BEGIN_SRC scala
+/* Models colors with RGB values between 0 and 1 */
+sealed trait Color {
+  def r: Double
+  def g: Double
+  def b: Double
+  def isLight(): Boolean = {r + g + b >= 1.0} // not how color theory works at all
+}
+
+final case object Red extends Color {
+  val r = 1.0
+  val g = 0.0
+  val b = 0.0
+}
+
+final case object Yellow extends Color {
+  val r = 1.0
+  val g = 1.0
+  val b = 0.0
+}
+
+final case object Pink extends Color {
+  val r = 1.0
+  val g = 1.0
+  val b = 0.7
+}
+
+final case class CustomColor(r: Double, g: Double, b: Double) extends Color
+
+sealed trait Shape {
+  def sides: Int
+  def perimeter: Double
+  def area: Double
+  def color: Color
+}
+
+final case class Circle(radius: Double, color: Color) extends Shape {
+  def sides = 1
+  def perimeter = math.Pi * radius * 2.0
+  def area = math.Pi * radius * radius
+}
+
+
+sealed trait Rectangular extends Shape {
+  def width: Double
+  def height: Double
+  def sides: Int = 4
+  def perimeter: Double = width * 2 + height * 2
+  def area: Double = width * height
+}
+
+final case class Rectangle(width: Double, height: Double, color: Color) extends Rectangular
+
+final case class Square(val size: Double, color: Color) extends Rectangular {
+  val width = size
+  val height = size
+}
+
+// question: why define a color on the trait if it's getting passed to Draw?
+
+object Draw {
+  def apply(s: Shape, c: Color): String = {
+    def colorHelper(col: Color): String = {
+      col match {
+        case Pink => "pink"
+        case Red => "red"
+        case Yellow => "yellow"
+        case _ => if (col.isLight) "light" else "dark"
+      }
+    }
+    s match {
+      case Square(size, _) => "A " + colorHelper(c) + " square with a side length of " + size
+      case Rectangle(width, height, _) => 
+        "A " + colorHelper(c) + " rectangle of width " + width + " and height " + height
+      case Circle(radius, _) => "A " + colorHelper(c) +  " circle of radius " + radius
+    }
+  }
+  def apply(s: Shape): String = {
+    def colorHelper(col: Color): String = {
+      col match {
+        case Pink => "pink"
+        case Red => "red"
+        case Yellow => "yellow"
+        case CustomColor(_, _, _) => if (col.isLight) "light" else "dark"
+      }
+    }
+    s match {
+      case Square(size, c) => "A " + colorHelper(c) + " square with a side length of " + size
+      case Rectangle(width, height, c) => 
+        "A " + colorHelper(c) + " rectangle of width " + width + " and height " + height
+      case Circle(radius, c) => "A " + colorHelper(c) +  " circle of radius " + radius
+    }
+  }
+}
+
+#+END_SRC
+In writing this solution, I forgot about case objects. It would have simplified the predefined colors bit a lot.
+I also forgot about method overloading, which could have been used to let Draw's ~apply~ method use the shape's already-defined color field.
+
+Once I changed the code to have those features, it worked as expected.
+**** 4.2.2.3 A Short Division Exercise
+#+BEGIN_SRC scala
+sealed trait DivisionResult {
+}
+
+final case class Finite(x: Int) extends DivisionResult
+
+final case class Infinite() extends DivisionResult
+
+case object divide {
+  def apply(num: Int, denom: Int): DivisionResult = {
+     denom match {
+       case 0 => Infinite()
+       case _ => Finite(num/denom)
+     }
+ }
+}
+
+
+assert(divide(1,0) == Infinite())
+assert(divide(4,2) == Finite(2))
+
+val divide2by = (denom: Int) => {
+  val res = divide(2, denom)
+  res match {
+    case Infinite() => "ERROR: Division by 0."
+    case Finite(x) => "Result: " + x.toString
+  }
+}
+
+#+END_SRC
+
+It was hard to remember that the values of classes have to be explicitly stated in the match expression if you want to refer to them in the sub-expressions.
+
+I also forgot to mark the two case classes as final, which is an important habit for reminding yourself when you've enumerated all the possibilities of a trait.
+*** 4.3 Modeling Data with Traits
+This section takes things from language features to the powerful idea of algebraic data types, which enumerate the logical relationships in the data we're modeling.
+
+Product type pattern
+#+BEGIN_SRC scala
+case class A(b: B, c: C)
+
+//or 
+
+trait A {
+  def b: B
+  def c: C
+}
+#+END_SRC
+The above is deceptively simple, but it nevertheless represents the idea of a /product type/, which is a more formal way of stating "class A has a B /and/ C."
+*** 4.4 The Sum Type Pattern
+In contrast to the above, we use /sum types/ when we want to express the idea that "class A is a B /or/ C." Product types encapsulate multiple cases, sum types pick a distinct case from an enumeration of possible cases.
+#+BEGIN_SRC scala
+sealed trait A
+final case class B() extends A
+final case class C() extends A
+#+END_SRC
+Any data that employs these  patterns to express these ideas is an /algebraic data type/ in Scala. 
+
+But the patterns we described here actually differ along two separate axes:
+
+|       | And          | Or       |
+| --    | --           | --       |
+| Is-a  |              | Sum type |
+| Has-a | Product type |          |
+
+So what's missing?
+
+In the "is-a and" pattern, we extend /multiple traits/:
+
+#+BEGIN_SRC scala 
+trait B
+trait C
+trait A extends B with C
+#+END_SRC
+
+But this pattern is left aside for the rest of this book. 
+
+Lastly, there's the "has-a or" pattern - "class A has a B or C." This pattern has two distinct implementations.
+
+The first uses an additional sealed trait to provide the basis for B and C:
+#+BEGIN_SRC scala
+trait A {
+  def d: D
+}
+
+sealed trait D
+final case class B() extends D
+final case class C() extends D
+#+END_SRC
+The second instead uses two additional classes extending A to encapsulate B and C.
+#+BEGIN_SRC scala
+sealed trait A
+final case class D(b: B) extends A
+final case class E(b: B) extends A
+#+END_SRC
+
+The key to writing idiomatic Scala code, the book argues, is knowing when you're using these patterns.
+
+**** 4.4.4.1 Stop on a Dime
+ #+BEGIN_QUOTE
+ "A traffic light is red, green, or yellow. Translate this description into Scala code."
+ #+END_QUOTE
+A traffic light is a sum type. It "is-a or" for three possible states.
+ #+BEGIN_SRC scala
+ sealed trait LightState {
+   def color: String
+ }
+
+ final case class RedLight() extends LightState {
+   def color: String = "red"
+ }
+
+ final case class GreenLight() extends LightState {
+   def color: String = "green"
+ }
+
+ final case class YellowLight() extends LightState {
+   def color: String = "yellow"
+ }
+ #+END_SRC
+ The book says there's no need to define fields or methods for these possible traffic light states, a change which yields case objects instead of case classes. Even as written, case objects might have been better than what I wrote, because the colors of the three possible light states don't actually change, and there's not really a need to have multiple instances of the different colors.
+**** 4.4.4.2 Calculator
+#+BEGIN_QUOTE
+"A calculation may succeed (with an Int result) or fail (with a String message). Implement this."
+#+END_QUOTE
+#+BEGIN_SRC scala
+sealed trait CalcResult {
+  def success: Boolean
+}
+final case class Success(result: Int) extends CalcResult {
+  def success = true
+}
+final case class Failure(message: String) extends CalcResult {
+  def success = false
+}
+#+END_SRC
+I am really in the habit of adding fields my data types don't need. I need to break that habit.
+**** 4.4.4.3 Water, Water, Everywhere
+#+BEGIN_QUOTE
+Bottled water has a size (an Int), a source (which is a well, spring, or tap), and a Boolean carbonated.
+Implement this in Scala.
+#+END_QUOTE
+Multiple patterns at once!
+#+BEGIN_SRC scala
+sealed trait Source
+final case class Tap() extends Source
+final case class Well() extends Source
+final case class Spring() extends Source
+
+case class BottledWater(size: Int, source: Source, carbonated: Boolean)
+#+END_SRC
+Once again, I specified a case class where the book specified a case object.
+*** 4.5 Working with data
+Often it's more important to decompose large data sources into smaller parts. This section outlines some strategies for doing that, using the toolkit of /structural recursion/.
+
+4.5.1 Structural Recursion using Polymorphism.
 * Spark: The Definitive Guide
 
 ** Shuffling
@@ -573,3 +1132,13 @@ Will calling ~repartition~ with a lower number of partitions simultaneously achi
 #+end_quote
 
 For uncommon use cases like ~collect_list~ on a large dataset, then this might be a necessary step - removing large result rows of collected data probably invokes the GC pretty frequently. 
+
+** Datasets
+
+#+BEGIN_QUOTE
+"To efficiently support domain-specific objects, a special concept called an, “Encoder” is required. The encoder maps the domain-specific type T to Spark’s internal type system."
+#+END_QUOTE
+
+If you have a case class specified that matches the schema of the data in some storage medium, you can convert the just-read DataFrame to a Dataset with a single operation: ~inputDF.as[DataType]~. This encodes the Row objects in the Dataframe as the case classes, allowing type-safe operations on the data.
+
+The book recommends Datasets judiciously, "only with user-defined encoding surgically and only where it makes sense. This might be at the beginning of a big data pipeline or at the end of one." This is because the use of methods on the Dataset's constituent class happens on the regular JVM, without any of the performance optimizations that Spark SQL is able to make. It is, however, sometimes the best option when you have logic or data types that the ordinary Spark API cannot handle.

@@ -70,9 +70,9 @@ List.fill(n)(i)
 Get the current timestamp in Scala (and Java)
 *** Back
 #+begin_src scala
-Calendar.getInstance.getTime.toInstant.atZone(ZoneId.of("America/New_York")).toLocalDate
+java.Time.LocalDateTime.now()
 #+end_src  
-It has to be a new calendar instance!
+
 ** top class in scala                                                  :note:
    :PROPERTIES:
    :ANKI_NOTE_TYPE: Basic
@@ -831,6 +831,149 @@ They enforce a clear separation between run-time data and compile-time methods.
 Return a new list ~l~ with element ~i~ added
 *** Back
 ~l :+ i~
+** static vs not static methods                                        :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-09 Wed]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 3, [[https://stackoverflow.com/questions/2671496/java-when-to-use-static-methods][Stack Overflow]]
+   :ANKI_NOTE_ID: 1526312625344
+   :END: 
+*** Front
+When would you put a method in a companion object?
+*** Back
+When you want a static method - a method that can be used without creating an instance of the object.
+** vals in traits                                                      :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-11 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 4
+   :ANKI_NOTE_ID: 1526312625565
+   :END: 
+*** Front
+Should you use vals in a trait?
+*** Back
+No, you should use def.
+** sealed trait inheritance/extension                                  :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-15 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Essential Scala, chapter 4, trial and error
+   :ANKI_NOTE_ID: 1526913598537
+   :END: 
+*** Front
+The compiler warns you about a match expression - you're not using a trait that extends a sealed trait.
+*** Back
+Make the inheritor trait sealed as well, and ensure all types that extend it are in the match expression.
+
+** sum type pattern implementation                                     :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-22 Tue]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: Essential Scala, chapter 4
+   :ANKI_NOTE_ID: 1527007267451
+   :END: 
+*** Front
+implement the sum type pattern
+*** Back
+#+BEGIN_SRC scala
+sealed trait A
+final case class B() extends A
+final case class C() extends A
+#+END_SRC
+** the sum type pattern (description)                                  :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-22 Tue]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: Essential Scala, chapter 4
+   :ANKI_NOTE_ID: 1527007267591
+   :END: 
+*** Front
+Another way of describing the sum type pattern
+*** Back
+A is a B /or/ C
+** product type pattern implementation (class)                         :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-22 Tue]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: Essential Scala, chapter 4
+   :ANKI_NOTE_ID: 1527007267837
+   :END: 
+*** Front
+Implement the product type pattern as a class
+*** Back
+#+BEGIN_SRC scala
+case class A(b: B, c: C)
+#+END_SRC
+** product type pattern implementation (trait)                         :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-22 Tue]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: Essential Scala, chapter 4
+   :ANKI_NOTE_ID: 1527007267970
+   :END: 
+*** Front
+Implement the product type pattern as a trait
+*** Back
+#+BEGIN_SRC scala
+trait A {
+  def b: B 
+  def c: C
+}
+#+END_SRC
+** product type description                                            :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-22 Tue]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: Essential Scala, chapter 4
+   :ANKI_NOTE_ID: 1527007268131
+   :END: 
+*** Front
+Another way of describing the product type pattern
+*** Back
+A has a B /and/ C
+** consider a case object instead                                      :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-22 Tue]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: Essential Scala, chapter 4
+   :ANKI_NOTE_ID: 1527007321199
+   :END: 
+*** Front
+You haven't yet specified how instances of this class might differ from one another.
+*** Back
+A case object might be a good idea.
+** scaladoc for classes                                                :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-24 Thu]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: [[https://issues.scala-lang.org/browse/SI-577][Scala JIRA (legacy)]]
+   :ANKI_NOTE_ID: 1527264158910
+   :END: 
+*** Front
+Document the parameters in a class
+*** Back
+#+BEGIN_SRC scala
+/** The smallest representation of a row of data.
+  * @param id the dimension (index) of the data
+  * @param value the data's value
+  */
+case class A(id: Int, value: Double)
+
+#+END_SRC
+
+** stable string hashes                                                :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-25 Fri]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: [[https://www.scala-lang.org/api/2.12.2/scala/util/hashing/MurmurHash3$.html][Scala Standard Library]]
+   :ANKI_NOTE_ID: 1527264159074
+   :END: 
+*** Front
+ensure that a string is consistently hashed
+*** Back
+#+BEGIN_SRC scala
+scala.util.hashing.MurmurHash3.stringHash(str)
+#+END_SRC
 * Spark                                                                :deck: 
 ** udf on list of columns                                              :note:
    :PROPERTIES:
@@ -1411,6 +1554,101 @@ Toggle line numbers in DB command mode
 *** Back
 ~<L>~
 
+** col with period in it                                               :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-08 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Trial and error
+   :ANKI_NOTE_ID: 1526312632802
+   :END: 
+*** Front
+Your column name has a period in it.
+*** Back
+Replace it with a different character
+** geospark load wkt                                                   :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-08 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Geospark documentation
+   :ANKI_NOTE_ID: 1526312633012
+   :END: 
+*** Front
+Load a wkt column in geospark
+*** Back
+#+BEGIN_SRC scala
+val parsedDF = df.selectExpr("*", "ST_GeomFromWKT(wkt) AS geom")
+#+END_SRC
+** geospark spatial join                                               :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-08 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Geospark documentation
+   :ANKI_NOTE_ID: 1526312633198
+   :END: 
+*** Front
+Perform a spatial join in geospark
+*** Back
+#+BEGIN_SRC scala
+df1.createOrReplaceTempView("df1")
+df2.createOrReplaceTempView("df2")
+#+END_SRC
+
+#+BEGIN_SRC sql
+%sql
+SELECT * FROM df1, df2 WHERE ST_Intersects(df1.geom, df2.geom)
+#+END_SRC
+** joining DFs                                                         :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-14 Mon]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: [[https://stackoverflow.com/a/43518900][Stack overflow]]
+   :ANKI_NOTE_ID: 1526312633431
+   :END: 
+*** Front
+What's the best way to join a list of dataframes without using ~unionAll~ (e.g. without an initial DF?)
+*** Back
+#+BEGIN_SRC scala
+dfs.reduce(_.union(_))
+#+END_SRC
+** explicitly set sub-partitions in spark                              :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-21 Mon]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: [[https://spark.apache.org/docs/2.3.0/api/scala/index.html#org.apache.spark.sql.Dataset][Spark Dataset API documentation]]
+   :ANKI_NOTE_ID: 1526913598713
+   :END: 
+*** Front
+Set the number of sub-partitions to use when repartitioning by a column
+*** Back
+#+BEGIN_SRC scala
+df.repartition(numPartitions=n, $"colName")
+#+END_SRC
+** rangePartitioner                                                    :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-21 Mon]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: [[https://spark.apache.org/docs/2.3.0/api/scala/index.html#org.apache.spark.RangePartitioner][Spark RangePartitioner API docs]]
+   :ANKI_NOTE_ID: 1526913598868
+   :END: 
+*** Front
+When you want to repartition and evenly distribute the values of a sortable column into n groups
+*** Back
+#+BEGIN_SRC scala
+df.repartitionByRange(numPartitions=n, $"colName")
+#+END_SRC
+** convert DF to Dataset                                               :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-22 Tue]
+   :ANKI_NOTE_TYPE: Basic
+   :SOURCE: Spark: The Definitive Guide, chapter 11
+   :ANKI_NOTE_ID: 1527007277336
+   :END: 
+*** Front
+Convert a DataFrame to a Dataset
+*** Back
+#+BEGIN_SRC scala
+val sampleDataset = sampleDF.as[DataCaseClass]
+#+END_SRC
 * Emacs                                                                :deck: 
 ** remove agenda filter                                                :note:
    :PROPERTIES:
