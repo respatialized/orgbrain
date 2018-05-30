@@ -1867,6 +1867,7 @@ Specify a variable number of arguments in a function definition
    :PROPERTIES: 
    :CREATED:  [2018-05-18 Fri]
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1527606590625
    :END: 
 *** Front
 get a random float between 0 and n
@@ -1879,6 +1880,7 @@ get a random float between 0 and n
    :PROPERTIES: 
    :CREATED:  [2018-05-18 Fri]
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1527606590836
    :END: 
 *** Front
 Get a random int between 0 and n (exclusive)
@@ -1890,6 +1892,7 @@ Get a random int between 0 and n (exclusive)
    :PROPERTIES: 
    :CREATED:  [2018-05-18 Fri]
    :ANKI_NOTE_TYPE: Basic
+   :ANKI_NOTE_ID: 1527606590970
    :END: 
 *** Front
 Pick a random item from a list
@@ -1916,6 +1919,17 @@ centroid (which is a linear combination of the points' features)
 In a chi-squared test, what does the p-value measure the probability of?
 *** Back
 The difference between the observed and expected distribution happening by chance
+** dispersion / sum of squares                                         :note:
+   :PROPERTIES: 
+   :CREATED:  [2018-05-30 Wed]
+   :ANKI_NOTE_TYPE: Basic (and reversed card)
+   :SOURCE: Data Science from Scratch, chapter 5
+   :ANKI_NOTE_ID: 1527694810877
+   :END: 
+*** Front
+Another way of describing dispersion
+*** Back
+The average squared distance of data points from the mean.
 * Programming Methods                                                  :deck:
 ** Stuck on functions                                                  :note:
    :PROPERTIES:
