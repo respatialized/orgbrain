@@ -1649,6 +1649,8 @@ Convert a DataFrame to a Dataset
 #+BEGIN_SRC scala
 val sampleDataset = sampleDF.as[DataCaseClass]
 #+END_SRC
+** Front
+Drop rows tied with one another in a window expression
 * Emacs                                                                :deck: 
 ** remove agenda filter                                                :note:
    :PROPERTIES:
